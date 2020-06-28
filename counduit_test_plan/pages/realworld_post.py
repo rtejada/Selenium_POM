@@ -7,9 +7,8 @@ from selenium.common.exceptions import ElementNotVisibleException
 from selenium.common.exceptions import ElementNotSelectableException
 from pages.realworld_base_page import RealworldCounduitBasePage
 
-class RealworldPost(RealworldCounduitBasePage):
 
-    URL = 'https://react-redux.realworld.io/'
+class RealworldPost(RealworldCounduitBasePage):
 
     TIMESTAMP = datetime.timestamp(datetime.now())
 
@@ -25,9 +24,6 @@ class RealworldPost(RealworldCounduitBasePage):
     SELECTOR_BODY_ARTICLE_POST = "//textarea[@class = 'form-control']"
     SELECTOR_TAGS_ARTICLE_POST = (By.XPATH, "//input[@placeholder='Enter tags']")
     BUTTON_INTRO_ARTICLE_POST = "//button[@type='button']"
-
-    def __init__(self, driver):
-        self.driver = driver
 
     def wait_button(self):
         wait = WebDriverWait(self.driver, 10, poll_frequency=1)
@@ -58,7 +54,6 @@ class RealworldPost(RealworldCounduitBasePage):
         body = self.POST['body']
 
         return title, body
-
 
     def get_url(self):
 

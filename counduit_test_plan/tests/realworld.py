@@ -5,6 +5,7 @@ from pages.realworld_post import RealworldPost
 from pages.realworld_confirm_post import PostPage
 from pages.realworld_user_profile import UserProfile
 from pages.realworld_add_comment import AddComment
+from dotenv import load_dotenv
 
 
 class Realworld(unittest.TestCase):
@@ -13,6 +14,7 @@ class Realworld(unittest.TestCase):
         #options = Options()
         #options.add_argument("--incognito")
         self.driver = webdriver.Chrome()
+        load_dotenv()
 
     def tearDown(self):
         self.driver.close()

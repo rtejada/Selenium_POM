@@ -6,6 +6,7 @@ from pages.cemip_home import CualEsMiIpHome
 from pages.cemip_maxmind import CualEsMiIpMaxMind
 from dotenv import load_dotenv
 
+
 class CemipPOM(unittest.TestCase):
 
     def setUp(self):

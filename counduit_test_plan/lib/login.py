@@ -1,16 +1,24 @@
 from selenium.webdriver.common.by import By
+from pages.realworld_base_page import RealworldCounduitBasePage
+import os
 
 
-class Login:
+class Login(RealworldCounduitBasePage):
+
+    LOGIN = ''
+    PWD = ''
     INIT_SESSION = 'Sign in'
-    LOGIN = 'maripuri@gmail.com'
-    PASSW = 'maripuri2020'
     BUTTON_MAIL_LOCATOR = (By.XPATH, '//input[@type="email"]')
     BUTTON_PASS_LOCATOR = (By.XPATH, '//input[@type="password"]')
     BUTTON_SUBMIT = (By.XPATH, '//button[@type="submit"]')
 
+    def load_variables(self):
+        self.LOGIN = os.getenv("LOGIN")
+        self.PWD = os.getenv("PWD")
+
     def __init__(self, driver):
-            self.driver = driver
+        super().__init__(driver)
+        self.load_variables()
 
     def login_user(self):
         sign_up = self.driver.find_element_by_link_text(self.INIT_SESSION)
@@ -22,7 +30,7 @@ class Login:
 
         password = self.driver.find_element(*self.BUTTON_PASS_LOCATOR)
         password.click()
-        password.send_keys(self.PASSW)
+        password.send_keys(self.PWD)
 
         sign_in = self.driver.find_element(*self.BUTTON_SUBMIT)
         sign_in.click()
