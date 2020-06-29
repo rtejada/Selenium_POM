@@ -6,7 +6,7 @@ import os
 class Login(RealworldCounduitBasePage):
 
     LOGIN = ''
-    PWD = ''
+    PASS = ''
     INIT_SESSION = 'Sign in'
     BUTTON_MAIL_LOCATOR = (By.XPATH, '//input[@type="email"]')
     BUTTON_PASS_LOCATOR = (By.XPATH, '//input[@type="password"]')
@@ -14,7 +14,7 @@ class Login(RealworldCounduitBasePage):
 
     def load_variables(self):
         self.LOGIN = os.getenv("LOGIN")
-        self.PWD = os.getenv("PWD")
+        self.PASS = os.getenv("PASS")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -30,7 +30,7 @@ class Login(RealworldCounduitBasePage):
 
         password = self.driver.find_element(*self.BUTTON_PASS_LOCATOR)
         password.click()
-        password.send_keys(self.PWD)
+        password.send_keys(self.PASS)
 
         sign_in = self.driver.find_element(*self.BUTTON_SUBMIT)
         sign_in.click()

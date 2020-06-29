@@ -1,5 +1,5 @@
-counduit_test_plan/tests/.env
-
+counduit/tests/.env
+suitecrm/tests/.env
 
 .idea/
 .idea
