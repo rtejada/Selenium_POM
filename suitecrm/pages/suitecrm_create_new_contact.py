@@ -2,6 +2,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from pages.suitecrm_base_page import SuitecrmBasePage
+from selenium.webdriver.common.keys import Keys
 
 
 class CreateNewContact(SuitecrmBasePage):
@@ -27,6 +28,8 @@ class CreateNewContact(SuitecrmBasePage):
     COUNTRY = (By.ID, 'primary_address_country')
     DESCRIPTION = (By.ID, 'description')
     BUTTON_COPY = (By.ID, 'alt_checkbox')
+    CONTACT_POINT = (By.ID, 'lead_source')
+    SAVE = (By.ID, 'SAVE')
 
     def page_contact(self):
         select_button_create = self.driver.find_element(*self.BUTTON_CREATE)
@@ -93,6 +96,14 @@ class CreateNewContact(SuitecrmBasePage):
 
         button_copy = self.driver.find_element(*self.BUTTON_COPY)
         button_copy.click()
+
+        contact_point = self.driver.find_element(*self.CONTACT_POINT)
+        select_contact_point = Select(contact_point)
+        select_contact_point.select_by_value('Other')
+
+        save = self.driver.find_element(*self.SAVE)
+        save.send_keys(Keys.ENTER)
+
 
 
 

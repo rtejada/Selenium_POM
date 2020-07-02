@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
 from pages.suitecrm_create_new_contact import CreateNewContact
+from pages.suitecrm_create_customer_account import CreateCustomerAccount
 from dotenv import load_dotenv
 import time
 
@@ -29,6 +30,10 @@ class Suitecrm(unittest.TestCase):
         create_contact = CreateNewContact(self.driver)
         create_contact.page_contact()
         create_contact.create_new_contact()
+
+        customer_account = CreateCustomerAccount(self.driver)
+        customer_account.page_account()
+        customer_account.create_customer_account()
         time.sleep(5)
 
 
