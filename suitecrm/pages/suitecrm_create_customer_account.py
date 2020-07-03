@@ -31,7 +31,6 @@ class CreateCustomerAccount(SuitecrmBasePage):
 
     SAVE = (By.ID, 'SAVE')
 
-
     def page_account(self):
         select_button_create = self.driver.find_element(*self.BUTTON_CREATE)
         select_button_create.click()
