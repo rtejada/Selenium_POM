@@ -17,13 +17,14 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
     NEW_SCREEN = (By.XPATH, '//*[@id="btn_parent_name"]/span')
     NAME = (By.ID, 'name_advanced')
     BUTTON_SEARCH = (By.XPATH, '//*[@id="search_form_submit"]')
-    DATA_ACCOUNT = (By.LINK_TEXT, 'Maria Molinero')
 
-    def assign_contact(self):
+    def assign_contact(self, contact_search_string):
         select_button_actions = self.driver.find_element(*self.BUTTON_ACTIONS)
         select_button_actions.click()
+
         action = ActionChains(self.driver)
         action.move_to_element(select_button_actions).perform()
+
         access_edit = self.driver.find_element(*self.EDIT)
         action.move_to_element(access_edit)
         action.click()
@@ -38,13 +39,13 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
         self.driver.switch_to.window(window_after)
         search_name = self.driver.find_element(*self.NAME)
         search_name.click()
-        search_name.send_keys(self.CONTACTS['name'])
+        search_name.send_keys(contact_search_string)
 
         search = self.driver.find_element(*self.BUTTON_SEARCH)
         search.click()
 
         self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
-        select_client = self.driver.find_element(*self.DATA_ACCOUNT)
+        select_client = self.driver.find_element((By.LINK_TEXT, contact_search_string))
         select_client.click()
 
         self.driver.switch_to.window(window_before)

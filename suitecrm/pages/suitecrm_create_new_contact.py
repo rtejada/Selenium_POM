@@ -1,14 +1,13 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from pages.suitecrm_base_page import SuitecrmBasePage
-from selenium.webdriver.common.keys import Keys
+from random import randint
 
 
 class CreateNewContact(SuitecrmBasePage):
 
-    CONTACTS = {'name': 'Maria', 'surnames': 'Molinero Molinero', 'tel': '730-8298', 'mobile': '689457896', 'workingStation': 'Comercial',
-                'departament': 'Pruebas', 'email': 'prueba@hotmail.com', 'address': '321 University Ave-', 'city': 'Alcorcon', 'CP': '28925',
+    CONTACTS = {'gender_type': 'Mrs.', 'type_contact': 'Other', 'name': 'Maria', 'surnames': 'Molinero Molinero', 'tel': '730-8298', 'mobile': '689457896', 'workingStation': 'Comercial',
+                'departament': 'Pruebas', 'email': '@hotmail.com', 'address': '321 University Ave-', 'city': 'Alcorcon', 'CP': '28925',
                 'country': 'España', 'description': 'Ninguna'}
 
     BUTTON_CREATE = (By.LINK_TEXT, 'Crear')
@@ -21,7 +20,7 @@ class CreateNewContact(SuitecrmBasePage):
     MOBILE = (By.ID, 'phone_mobile')
     WORKING_STATION = (By.ID, 'title')
     DEPARTMENT = (By.ID, 'department')
-    EMAIL = (By.ID, 'Contacts0emailAddress0' )
+    EMAIL = (By.ID, 'Contacts0emailAddress0')
     ADDRESS = (By.ID, 'primary_address_street')
     CITY = (By.ID, 'primary_address_city')
     CP = (By.ID, 'primary_address_postalcode')
@@ -31,79 +30,62 @@ class CreateNewContact(SuitecrmBasePage):
     CONTACT_POINT = (By.ID, 'lead_source')
     SAVE = (By.ID, 'SAVE')
 
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.CONTACTS['surnames'] = self.CONTACTS['surnames'] + str(randint(1, 90000000))
+        self.CONTACTS['email'] = str(randint(1, 90000000)) + (self.CONTACTS['email'])
+
     def page_contact(self):
+
         select_button_create = self.driver.find_element(*self.BUTTON_CREATE)
         select_button_create.click()
+
         action = ActionChains(self.driver)
         action.move_to_element(select_button_create).perform()
+
         access_create_contact = self.driver.find_element(*self.CREATE_CONTACT)
         action.move_to_element(access_create_contact)
         action.click()
         action.perform()
 
     def create_new_contact(self):
-        type_new_contact = self.driver.find_element(*self.SELECT_TYPE)
-        type_select = Select(type_new_contact)
-        type_select.select_by_value('Mrs.')
 
-        name = self.driver.find_element(*self.FIRST_NAME)
-        name.click()
-        name.send_keys(self.CONTACTS['name'])
+        self.fill_select_field(self.SELECT_TYPE, self.CONTACTS['gender_type'])
 
-        surname = self.driver.find_element(*self.SURNAMES)
-        surname.click()
-        surname.send_keys(self.CONTACTS['surnames'])
+        self.fill_text_field(self.FIRST_NAME, self.CONTACTS['name'])
 
-        telephone = self.driver.find_element(*self.TELEPHONE)
-        telephone.click()
-        telephone.send_keys(self.CONTACTS['tel'])
+        self.fill_text_field(self.SURNAMES, self.CONTACTS['surnames'])
 
-        mobile = self.driver.find_element(*self.MOBILE)
-        mobile.click()
-        mobile.send_keys(self.CONTACTS['mobile'])
+        self.fill_text_field(self.TELEPHONE, self.CONTACTS['tel'])
 
-        work_station = self.driver.find_element(*self.WORKING_STATION)
-        work_station.click()
-        work_station.send_keys(self.CONTACTS['workingStation'])
+        self.fill_text_field(self.MOBILE, self.CONTACTS['mobile'])
 
-        department = self.driver.find_element(*self.DEPARTMENT)
-        department.click()
-        department.send_keys(self.CONTACTS['departament'])
+        self.fill_text_field(self.WORKING_STATION, self.CONTACTS['workingStation'])
 
-        email = self.driver.find_element(*self.EMAIL)
-        email.click()
-        email.send_keys(self.CONTACTS['email'])
+        self.fill_text_field(self.DEPARTMENT, self.CONTACTS['departament'])
 
-        address = self.driver.find_element(*self.ADDRESS)
-        address.click()
-        address.send_keys(self.CONTACTS['address'])
+        self.fill_text_field(self.EMAIL, self.CONTACTS['email'])
 
-        city = self.driver.find_element(*self.CITY)
-        city.click()
-        city.send_keys(self.CONTACTS['city'])
+        self.fill_text_field(self.ADDRESS, self.CONTACTS['address'])
 
-        cp = self.driver.find_element(*self.CP)
-        cp.click()
-        cp.send_keys(self.CONTACTS['CP'])
+        self.fill_text_field(self.CITY, self.CONTACTS['city'])
 
-        country = self.driver.find_element(*self.COUNTRY)
-        country.click()
-        country.send_keys(self.CONTACTS['country'])
+        self.fill_text_field(self.CP, self.CONTACTS['CP'])
 
-        description = self.driver.find_element(*self.DESCRIPTION)
-        description.click()
-        description.send_keys(self.CONTACTS['description'])
+        self.fill_text_field(self.COUNTRY, self.CONTACTS['country'])
 
-        button_copy = self.driver.find_element(*self.BUTTON_COPY)
-        button_copy.click()
+        self.fill_text_field(self.DESCRIPTION, self.CONTACTS['description'])
 
-        contact_point = self.driver.find_element(*self.CONTACT_POINT)
-        select_contact_point = Select(contact_point)
-        select_contact_point.select_by_value('Other')
+        self.click_button_copy(self.BUTTON_COPY)
 
-        save = self.driver.find_element(*self.SAVE)
-        save.send_keys(Keys.ENTER)
+        self.fill_select_field(self.CONTACT_POINT, self.CONTACTS['type_contact'])
 
+        self.button_save(self.SAVE)
+
+
+    def get_search_string(self):
+
+        return self.CONTACTS['name'] + self.CONTACTS['surnames']
 
 
 

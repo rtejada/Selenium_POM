@@ -32,13 +32,16 @@ class Suitecrm(unittest.TestCase):
         create_contact.page_contact()
         create_contact.create_new_contact()
 
+        contact_search_string = create_contact.get_search_string()
+
         customer_account = CreateCustomerAccount(self.driver)
         customer_account.page_account()
         customer_account.create_customer_account()
 
         assign_customer_account = AssignContactCustomerAccount(self.driver)
-        assign_customer_account.assign_contact()
+        assign_customer_account.assign_contact(contact_search_string)
 
-        time.sleep(2)
+      
+
 
 
