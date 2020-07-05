@@ -6,6 +6,8 @@ from pages.suitecrm_login_page import LoginPage
 from pages.suitecrm_create_new_contact import CreateNewContact
 from pages.suitecrm_create_customer_account import CreateCustomerAccount
 from pages.suitecrm_assign_contact_customer_account import AssignContactCustomerAccount
+from pages.suitecrm_search_customer import SearchCustomer
+from pages.suitecrm_search_contact import SearchContact
 from dotenv import load_dotenv
 import time
 
@@ -32,16 +34,27 @@ class Suitecrm(unittest.TestCase):
         create_contact.page_contact()
         create_contact.create_new_contact()
 
-        contact_search_string = create_contact.get_search_string()
+        contact_email = create_contact.get_contact_email()
+        contact_name = create_contact.get_contact_name()
 
         customer_account = CreateCustomerAccount(self.driver)
         customer_account.page_account()
         customer_account.create_customer_account()
 
-        assign_customer_account = AssignContactCustomerAccount(self.driver)
-        assign_customer_account.assign_contact(contact_search_string)
+        customer_email = customer_account.get_customer_email()
+        customer_name = customer_account.get_customer_name()
 
-      
+        assign_customer_account = AssignContactCustomerAccount(self.driver)
+        assign_customer_account.assign_contact(contact_email, contact_name)
+
+        search_customer = SearchCustomer(self.driver)
+        search_customer.search_customer(customer_email, customer_name)
+
+        search_contact = SearchContact(self.driver)
+        search_contact.search_contact(contact_email, contact_name)
+
+
+
 
 
 

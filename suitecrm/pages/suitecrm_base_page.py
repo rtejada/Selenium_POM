@@ -21,13 +21,16 @@ class SuitecrmBasePage:
         element.click()
         element.send_keys(text)
 
-    def click_button_copy(self, selector):
+    def click_button(self, selector):
         element_copy = self.driver.find_element(*selector)
         element_copy.click()
 
     def button_save(self, selector):
         save = self.driver.find_element(*selector)
         save.send_keys(Keys.ENTER)
+
+    def window_scroll(self):
+        self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
 
 
 

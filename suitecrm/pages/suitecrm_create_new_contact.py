@@ -6,9 +6,9 @@ from random import randint
 
 class CreateNewContact(SuitecrmBasePage):
 
-    CONTACTS = {'gender_type': 'Mrs.', 'type_contact': 'Other', 'name': 'Maria', 'surnames': 'Molinero Molinero', 'tel': '730-8298', 'mobile': '689457896', 'workingStation': 'Comercial',
-                'departament': 'Pruebas', 'email': '@hotmail.com', 'address': '321 University Ave-', 'city': 'Alcorcon', 'CP': '28925',
-                'country': 'España', 'description': 'Ninguna'}
+    CONTACTS = {'gender_type': 'Mrs.', 'type_contact': 'Other', 'name': 'Roxana', 'surnames': 'Pruebas', 'tel': '730-8298', 'mobile': '689457896', 'workingStation': 'Comercial',
+                'departament': 'Pruebas', 'email': '@pruebas.com', 'address': '321 University', 'city': 'Alcorcon', 'CP': '28925',
+                'country': 'España', 'description': 'Contacto de Pruebas'}
 
     BUTTON_CREATE = (By.LINK_TEXT, 'Crear')
     CREATE_CONTACT = (By.LINK_TEXT, 'Crear Contactos')
@@ -32,7 +32,7 @@ class CreateNewContact(SuitecrmBasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.CONTACTS['surnames'] = self.CONTACTS['surnames'] + str(randint(1, 90000000))
+        self.CONTACTS['surnames'] = self.CONTACTS['surnames'] + ' ' + str(randint(1, 90000000))
         self.CONTACTS['email'] = str(randint(1, 90000000)) + (self.CONTACTS['email'])
 
     def page_contact(self):
@@ -76,16 +76,20 @@ class CreateNewContact(SuitecrmBasePage):
 
         self.fill_text_field(self.DESCRIPTION, self.CONTACTS['description'])
 
-        self.click_button_copy(self.BUTTON_COPY)
+        self.click_button(self.BUTTON_COPY)
 
         self.fill_select_field(self.CONTACT_POINT, self.CONTACTS['type_contact'])
 
         self.button_save(self.SAVE)
 
+    def get_contact_email(self):
 
-    def get_search_string(self):
+        return self.CONTACTS['email']
 
-        return self.CONTACTS['name'] + self.CONTACTS['surnames']
+    def get_contact_name(self):
+
+        return self.CONTACTS['name'] + ' ' + self.CONTACTS['surnames']
+
 
 
 

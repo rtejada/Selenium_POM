@@ -5,7 +5,7 @@ from random import randint
 
 class CreateCustomerAccount(SuitecrmBasePage):
 
-    CUSTOMER_ACCOUNTS = {'type': 'Customer', 'type_industry': 'Communications', 'name': 'Industrias Molinero', 'tel': '730-8298', 'web': 'www.prueba.com', 'email': 'prueba@hotmail.com',
+    CUSTOMER_ACCOUNTS = {'type': 'Customer', 'type_industry': 'Communications', 'name': 'Industrias PRUEBAS', 'tel': '730-8298', 'web': 'www.prueba.com', 'email': '@pruebas.com',
                 'address': '321 University Ave-', 'city': 'Alcorcon', 'CP': '28925', 'country': 'España',
                 'description': 'Ninguna', 'annual_revenue': '1000000', 'employees': '40'}
 
@@ -31,9 +31,11 @@ class CreateCustomerAccount(SuitecrmBasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.CUSTOMER_ACCOUNTS['name'] = self.CUSTOMER_ACCOUNTS['name'] + str(randint(1, 90000000))
+        self.CUSTOMER_ACCOUNTS['name'] = self.CUSTOMER_ACCOUNTS['name'] + ' ' + str(randint(1, 90000000))
+        self.CUSTOMER_ACCOUNTS['email'] = str(randint(1, 90000000)) + (self.CUSTOMER_ACCOUNTS['email'])
 
     def page_account(self):
+
         select_button_create = self.driver.find_element(*self.BUTTON_CREATE)
         select_button_create.click()
 
@@ -65,7 +67,7 @@ class CreateCustomerAccount(SuitecrmBasePage):
 
         self.fill_text_field(self.DESCRIPTION, self.CUSTOMER_ACCOUNTS['description'])
 
-        self.click_button_copy(self.BUTTON_COPY)
+        self.click_button(self.BUTTON_COPY)
 
         self.fill_select_field(self.TYPE_ACCOUNT, self.CUSTOMER_ACCOUNTS['type'])
 
@@ -76,3 +78,11 @@ class CreateCustomerAccount(SuitecrmBasePage):
         self.fill_text_field(self.EMPLOYEES, self.CUSTOMER_ACCOUNTS['employees'])
 
         self.button_save(self.SAVE)
+
+    def get_customer_email(self):
+
+        return self.CUSTOMER_ACCOUNTS['email']
+
+    def get_customer_name(self):
+
+        return self.CUSTOMER_ACCOUNTS['name']
