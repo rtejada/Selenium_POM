@@ -26,9 +26,11 @@ class LoginPage(SuitecrmBasePage):
     def login_user(self):
         user = self.driver.find_element(*self.USER_NAME)
         user.click()
+
         user.send_keys(self.USERNAME)
         pwd = self.driver.find_element(*self.USER_PDW)
         pwd.click()
+
         pwd.send_keys(self.USERNAME_PWD)
         button_init = self.driver.find_element(*self.BUTTON_SIGN_IN)
         button_init.send_keys(Keys.ENTER)

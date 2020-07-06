@@ -1,11 +1,11 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from pages.suitecrm_base_page import SuitecrmBasePage
 from random import randint
 
+
 class CreateCustomerAccount(SuitecrmBasePage):
 
-    CUSTOMER_ACCOUNTS = {'type': 'Customer', 'type_industry': 'Communications', 'name': 'Industrias PRUEBAS', 'tel': '730-8298', 'web': 'www.prueba.com', 'email': '@pruebas.com',
+    CUSTOMER_ACCOUNTS = {'type': 'Customer', 'type_industry': 'Communications', 'name': 'PRUEBA REMOTA S.A.', 'tel': '730-8298', 'web': 'www.prueba.com', 'email': '@pruebas.com',
                 'address': '321 University Ave-', 'city': 'Alcorcon', 'CP': '28925', 'country': 'España',
                 'description': 'Ninguna', 'annual_revenue': '1000000', 'employees': '40'}
 
@@ -36,16 +36,7 @@ class CreateCustomerAccount(SuitecrmBasePage):
 
     def page_account(self):
 
-        select_button_create = self.driver.find_element(*self.BUTTON_CREATE)
-        select_button_create.click()
-
-        action = ActionChains(self.driver)
-        action.move_to_element(select_button_create).perform()
-
-        access_create_contact = self.driver.find_element(*self.CREATE_CONTACT)
-        action.move_to_element(access_create_contact)
-        action.click()
-        action.perform()
+        self.menu_select_option(self.BUTTON_CREATE, self.CREATE_CONTACT)
 
     def create_customer_account(self):
 

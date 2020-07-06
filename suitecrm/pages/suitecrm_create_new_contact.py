@@ -37,16 +37,7 @@ class CreateNewContact(SuitecrmBasePage):
 
     def page_contact(self):
 
-        select_button_create = self.driver.find_element(*self.BUTTON_CREATE)
-        select_button_create.click()
-
-        action = ActionChains(self.driver)
-        action.move_to_element(select_button_create).perform()
-
-        access_create_contact = self.driver.find_element(*self.CREATE_CONTACT)
-        action.move_to_element(access_create_contact)
-        action.click()
-        action.perform()
+        self.menu_select_option(self.BUTTON_CREATE, self.CREATE_CONTACT)
 
     def create_new_contact(self):
 

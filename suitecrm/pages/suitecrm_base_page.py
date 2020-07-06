@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class SuitecrmBasePage:
@@ -31,6 +34,26 @@ class SuitecrmBasePage:
 
     def window_scroll(self):
         self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+
+    def menu_select_option(self, menu_selector, option_selector):
+
+        select_button = self.driver.find_element(*menu_selector)
+        select_button.click()
+
+        action = ActionChains(self.driver)
+        action.move_to_element(select_button).perform()
+
+        access_option_selector = self.driver.find_element(*option_selector)
+        action.move_to_element(access_option_selector)
+        action.click()
+        action.perform()
+
+    def wait_selector_visible(self, locator):
+        wait = WebDriverWait(self.driver, 10, poll_frequency=1)
+        wait.until(EC.visibility_of_element_located(*locator))
+
+
+
 
 
 

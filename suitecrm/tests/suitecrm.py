@@ -9,14 +9,13 @@ from pages.suitecrm_assign_contact_customer_account import AssignContactCustomer
 from pages.suitecrm_search_customer import SearchCustomer
 from pages.suitecrm_search_contact import SearchContact
 from dotenv import load_dotenv
-import time
 
 
 class Suitecrm(unittest.TestCase):
 
     def setUp(self):
         options = Options()
-        options.add_argument("--incognito")
+        options.add_argument("--start-maximized")
         self.driver = webdriver.Chrome(options=options)
         load_dotenv()
 
@@ -47,11 +46,12 @@ class Suitecrm(unittest.TestCase):
         assign_customer_account = AssignContactCustomerAccount(self.driver)
         assign_customer_account.assign_contact(contact_email, contact_name)
 
-        search_customer = SearchCustomer(self.driver)
-        search_customer.search_customer(customer_email, customer_name)
-
         search_contact = SearchContact(self.driver)
         search_contact.search_contact(contact_email, contact_name)
+
+
+        '''search_customer = SearchCustomer(self.driver)
+        search_customer.search_customer(customer_email, customer_name)'''
 
 
 

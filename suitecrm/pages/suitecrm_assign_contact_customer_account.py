@@ -1,6 +1,7 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from pages.suitecrm_base_page import SuitecrmBasePage
+import time
 
 
 class AssignContactCustomerAccount(SuitecrmBasePage):
@@ -11,35 +12,27 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
     EMAIL = (By.ID, 'email_advanced')
     BUTTON_SEARCH = (By.XPATH, '//*[@id="search_form_submit"]')
 
-    def assign_contact(self, client_email, data_client):
+    def assign_contact(self, contact_email, contact_name):
 
         self.window_scroll()
 
-        select_button_actions = self.driver.find_element(*self.BUTTON_CONTACT)
-        select_button_actions.click()
-
-        action = ActionChains(self.driver)
-        action.move_to_element(select_button_actions).perform()
-
-        access_to_select = self.driver.find_element(*self.ACCESS_SELECT)
-        action.move_to_element(access_to_select)
-        action.click()
-        action.perform()
+        self.menu_select_option(self.BUTTON_CONTACT, self.ACCESS_SELECT)
 
         select = self.driver.find_element(*self.CREATE_CONTACT)
         window_before = self.driver.window_handles[0]
         select.click()
+        time.sleep(2)
 
         window_after = self.driver.window_handles[1]
         self.driver.switch_to.window(window_after)
 
-        self.fill_text_field(self.EMAIL, client_email)
+        self.fill_text_field(self.EMAIL, contact_email)
 
         self.click_button(self.BUTTON_SEARCH)
 
         self.window_scroll()
 
-        select_client = self.driver.find_element(By.PARTIAL_LINK_TEXT, data_client)
+        select_client = self.driver.find_element(By.PARTIAL_LINK_TEXT, contact_name)
         select_client.click()
 
         self.driver.switch_to.window(window_before)
