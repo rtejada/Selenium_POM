@@ -50,8 +50,7 @@ class Suitecrm(unittest.TestCase):
         search_contact.search_contact(contact_email, contact_name)
 
 
-        '''search_customer = SearchCustomer(self.driver)
-        search_customer.search_customer(customer_email, customer_name)'''
+
 
 
 

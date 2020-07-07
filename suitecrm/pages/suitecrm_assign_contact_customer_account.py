@@ -8,7 +8,7 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
 
     BUTTON_CONTACT = (By.LINK_TEXT, 'CONTACTOS')
     CREATE_CONTACT = (By.LINK_TEXT, 'Seleccionar')
-    ACCESS_SELECT = (By.XPATH, "//li/span[@class ='suitepicon suitepicon-action-caret']")
+    ACCESS_SELECT = (By.XPATH, '//*[@id="list_subpanel_contacts"]/table//td/table/tbody//li/span')
     EMAIL = (By.ID, 'email_advanced')
     BUTTON_SEARCH = (By.XPATH, '//*[@id="search_form_submit"]')
 

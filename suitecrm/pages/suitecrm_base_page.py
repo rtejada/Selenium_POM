@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
 
 
 class SuitecrmBasePage:
@@ -25,8 +26,8 @@ class SuitecrmBasePage:
         element.send_keys(text)
 
     def click_button(self, selector):
-        element_copy = self.driver.find_element(*selector)
-        element_copy.click()
+        element = self.driver.find_element(*selector)
+        element.click()
 
     def button_save(self, selector):
         save = self.driver.find_element(*selector)
@@ -43,14 +44,20 @@ class SuitecrmBasePage:
         action = ActionChains(self.driver)
         action.move_to_element(select_button).perform()
 
+        self.wait_button_clickable(option_selector)
+
         access_option_selector = self.driver.find_element(*option_selector)
         action.move_to_element(access_option_selector)
         action.click()
         action.perform()
 
+    def wait_button_clickable(self, locator):
+        wait = WebDriverWait(self.driver, 10, poll_frequency=1)
+        wait.until(EC.element_to_be_clickable(locator))
+
     def wait_selector_visible(self, locator):
         wait = WebDriverWait(self.driver, 10, poll_frequency=1)
-        wait.until(EC.visibility_of_element_located(*locator))
+        wait.until(EC.visibility_of_element_located(locator))
 
 
 
