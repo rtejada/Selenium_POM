@@ -7,8 +7,8 @@ class SearchCustomer(SuitecrmBasePage):
     MENU_SALES = (By.LINK_TEXT, 'VENTAS')
     ACCESS_ACCOUNT = (By.LINK_TEXT, 'Cuentas')
     FILTER = (By.XPATH, "//a[@title = 'Filtro']")
-    WAIT_LOCATOR = (By.XPATH, "//ul[@class='nav nav-tabs']/li/a[@aria-expanded='true']")
-    RAPID_FILTER = (By.XPATH, "//ul[@class='nav nav-tabs']/li/a[@aria-expanded='true']")
+    RAPID_FILTER = (By.LINK_TEXT, 'Filtro rápido')
+    WINDOW_VISIBLE = (By.ID, 'searchDialog')
     BUTTON_NAME = (By.ID, 'name_basic')
     SEARCH = (By.ID, 'search_form_submit')
 
@@ -20,8 +20,14 @@ class SearchCustomer(SuitecrmBasePage):
 
         self.click_button(self.FILTER)
 
+        self.wait_selector_visible(self.WINDOW_VISIBLE)
+
         self.click_button(self.RAPID_FILTER)
+
+        self.wait_selector_visible(self.BUTTON_NAME)
 
         self.fill_text_field(self.BUTTON_NAME, customer_name)
 
         self.button_save(self.SEARCH)
+
+        self.click_button((By.LINK_TEXT, customer_name))

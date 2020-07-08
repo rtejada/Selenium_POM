@@ -23,6 +23,7 @@ class SuitecrmBasePage:
     def fill_text_field(self, selector, text):
         element = self.driver.find_element(*selector)
         element.click()
+        element.clear()
         element.send_keys(text)
 
     def click_button(self, selector):
