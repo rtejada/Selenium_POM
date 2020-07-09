@@ -30,12 +30,9 @@ class SuitecrmBasePage:
         element = self.driver.find_element(*selector)
         element.click()
 
-    def button_save(self, selector):
+    def button(self, selector):
         save = self.driver.find_element(*selector)
         save.send_keys(Keys.ENTER)
-
-    def window_scroll(self):
-        self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
 
     def menu_select_option(self, menu_selector, option_selector):
 
@@ -60,10 +57,18 @@ class SuitecrmBasePage:
         wait = WebDriverWait(self.driver, 10, poll_frequency=1)
         wait.until(EC.visibility_of_element_located(locator))
 
+    def window_scroll(self):
+        self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
 
+    def window_scroll_half(self):
+        #Si quieres bajar a algún nivel, usa esto, aquí he usado "1000", puedes variar según tu uso#
 
+        self.driver.execute_script("scrollBy(0,+500);")
 
+    def window_scroll_home(self):
+        #Si quieres subir de nivel, usa esto, otra vez usé aquí "-500", puedes variar según su uso..
 
+        self.driver.execute_script("scrollBy(0,-500);")
 
 
 

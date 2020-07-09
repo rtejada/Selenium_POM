@@ -30,7 +30,7 @@ class SearchContact(SuitecrmBasePage):
 
         self.fill_text_field(self.BUTTON_NAME, contact_name)
 
-        self.button_save(self.SEARCH)
+        self.button(self.SEARCH)
 
         self.click_button((By.PARTIAL_LINK_TEXT, contact_name))
 

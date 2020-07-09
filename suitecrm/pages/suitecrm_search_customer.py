@@ -28,6 +28,6 @@ class SearchCustomer(SuitecrmBasePage):
 
         self.fill_text_field(self.BUTTON_NAME, customer_name)
 
-        self.button_save(self.SEARCH)
+        self.button(self.SEARCH)
 
         self.click_button((By.LINK_TEXT, customer_name))

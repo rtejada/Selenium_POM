@@ -8,6 +8,7 @@ from pages.suitecrm_create_customer_account import CreateCustomerAccount
 from pages.suitecrm_assign_contact_customer_account import AssignContactCustomerAccount
 from pages.suitecrm_search_customer import SearchCustomer
 from pages.suitecrm_search_contact import SearchContact
+from pages.suitecrm_create_campaign import CreateNewCampaign
 from dotenv import load_dotenv
 import time
 
@@ -31,6 +32,8 @@ class Suitecrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
+        '''
+
         create_contact = CreateNewContact(self.driver)
         create_contact.page_contact()
         create_contact.create_new_contact()
@@ -53,6 +56,12 @@ class Suitecrm(unittest.TestCase):
 
         search_customer = SearchCustomer(self.driver)
         search_customer.search_customer(customer_email, customer_name)
+        
+        '''
+        create_campaign = CreateNewCampaign(self.driver)
+        create_campaign.access_to_all()
+        create_campaign.create_new_campaign()
+        time.sleep(1)
 
 
 

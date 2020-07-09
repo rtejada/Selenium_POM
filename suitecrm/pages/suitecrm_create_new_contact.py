@@ -1,4 +1,3 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from pages.suitecrm_base_page import SuitecrmBasePage
 from random import randint
@@ -6,9 +5,9 @@ from random import randint
 
 class CreateNewContact(SuitecrmBasePage):
 
-    CONTACTS = {'gender_type': 'Mrs.', 'type_contact': 'Other', 'name': 'Roxana', 'surnames': 'Pruebas', 'tel': '730-8298', 'mobile': '689457896', 'workingStation': 'Comercial',
-                'departament': 'Pruebas', 'email': '@pruebas.com', 'address': '321 University', 'city': 'Alcorcon', 'CP': '28925',
-                'country': 'España', 'description': 'Contacto de Pruebas'}
+    CONTACTS = {'gender_type': 'Mrs.', 'type_contact': 'Other', 'name': 'Toulouse', 'surnames': 'Tournefeuille', 'tel': '034-829875', 'mobile': '689457815', 'workingStation': 'Administrativo',
+                'departament': 'Toulose_Depart', 'email': '@toulouse.fr', 'address': '138 Saint-Geniès-Bellevue', 'city': 'Saint-Bellevue', 'CP': '31200',
+                'country': 'Francia', 'description': 'Esperas explícitas disponibles para clientes de Selenium'}
 
     BUTTON_CREATE = (By.LINK_TEXT, 'Crear')
     CREATE_CONTACT = (By.LINK_TEXT, 'Crear Contactos')
@@ -71,7 +70,7 @@ class CreateNewContact(SuitecrmBasePage):
 
         self.fill_select_field(self.CONTACT_POINT, self.CONTACTS['type_contact'])
 
-        self.button_save(self.SAVE)
+        self.button(self.SAVE)
 
     def get_contact_email(self):
 
@@ -82,16 +81,6 @@ class CreateNewContact(SuitecrmBasePage):
         return self.CONTACTS['name'] + ' ' + self.CONTACTS['surnames']
 
 
-
-
-
-
-        '''
-        ACCOUNT_BUTTON = (By.ID, 'btn_account_name')
-        select_account_button = self.driver.find_element(*self.ACCOUNT_BUTTON)
-        select_account_button.click()
-        self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
-        '''
 
 
 
