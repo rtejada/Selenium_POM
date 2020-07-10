@@ -20,6 +20,11 @@ class SuitecrmBasePage:
         type_select = Select(element_select)
         type_select.select_by_value(text)
 
+    def fill_select_name(self, selector, text):
+        element_select = self.driver.find_element(*selector)
+        type_select = Select(element_select)
+        type_select.select_by_visible_text(text)
+
     def fill_text_field(self, selector, text):
         element = self.driver.find_element(*selector)
         element.click()
