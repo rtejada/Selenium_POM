@@ -37,7 +37,6 @@ class CreateNewCampaign(SuitecrmBasePage):
     MINUTES = (By.ID, 'date_start_minutes')
     FROM_ADDRESS = (By.ID, 'from_addr')
 
-
     def __init__(self, driver):
         super().__init__(driver)
         self.CAMPAIGNS['name_campaign'] = self.CAMPAIGNS['name_campaign'] + ' ' + str(randint(1, 90000000))
