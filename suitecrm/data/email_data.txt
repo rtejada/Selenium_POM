@@ -1,0 +1,8 @@
+SUITE-CRM-
+@example.com
+.CRM.com
+@example.com
+imap
+pruebasuitecrm
+mail_server_port: * 	
+monitored_folder: *
