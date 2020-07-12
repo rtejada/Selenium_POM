@@ -4,5 +4,7 @@ SUITE-CRM-
 @example.com
 imap
 pruebasuitecrm
+993 IMAP
+SUITE-CRM-CLIENTES
 mail_server_port: * 	
 monitored_folder: *

@@ -67,7 +67,7 @@ class CreateCustomerAccount(SuitecrmBasePage):
 
         self.fill_text_field(self.EMPLOYEES, self.CUSTOMER_ACCOUNTS['employees'])
 
-        self.button(self.SAVE)
+        self.send_enter_key(self.SAVE)
 
     def get_customer_email(self):
 

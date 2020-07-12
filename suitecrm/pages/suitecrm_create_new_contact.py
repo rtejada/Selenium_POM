@@ -70,7 +70,7 @@ class CreateNewContact(SuitecrmBasePage):
 
         self.fill_select_field(self.CONTACT_POINT, self.CONTACTS['type_contact'])
 
-        self.button(self.SAVE)
+        self.send_enter_key(self.SAVE)
 
     def get_contact_email(self):
 

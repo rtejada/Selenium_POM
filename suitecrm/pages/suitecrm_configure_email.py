@@ -16,7 +16,9 @@ class ConfigureEmail(SuitecrmBasePage):
     URL_SERVER = (By.ID, 'server_url')
     EMAIL_USER = (By.ID, 'email_user')
     PROTOCOL = (By.ID, 'protocol')
+    EMAIL_PASS = (By.ID, 'email_password')
     EMAIL_PORT = (By.ID, 'port')
+    MONITORED_FOLDER = (By.ID, 'mailbox')
     SAVE = (By.ID, 'wiz_submit_button')
 
     def __init__(self, driver):
@@ -24,11 +26,12 @@ class ConfigureEmail(SuitecrmBasePage):
 
         f = open("../data/email_data.txt", "r")
         self.EMAIL_DATA = f.readlines()
+        f.close()
 
-        self.EMAIL_DATA[0] = self.EMAIL_DATA[0] + ' ' + str(randint(1, 90000000))
-        self.EMAIL_DATA[1] = str(randint(1, 90000000)) + self.EMAIL_DATA[0]
-        self.EMAIL_DATA[2] = self.EMAIL_DATA[0] + ' ' + str(randint(1, 90000000))
-        self.EMAIL_DATA[3] = str(randint(1, 90000000)) + self.EMAIL_DATA[0]
+        self.EMAIL_DATA[0] = self.EMAIL_DATA[0] + str(randint(1, 90000000))
+        self.EMAIL_DATA[1] = str(randint(1, 90000000)) + self.EMAIL_DATA[1]
+        self.EMAIL_DATA[2] = str(randint(1, 90000000)) + self.EMAIL_DATA[2]
+        self.EMAIL_DATA[3] = str(randint(1, 90000000)) + self.EMAIL_DATA[3]
         
     def access_campaign_all(self):
 
@@ -52,9 +55,20 @@ class ConfigureEmail(SuitecrmBasePage):
 
         self.fill_select_field(self.PROTOCOL, self.EMAIL_DATA[4].replace('\n', ''))
 
-        self.fill_text_field(self.EMAIL_PORT, self.EMAIL_DATA[5])
+        self.fill_text_field(self.EMAIL_PORT, self.EMAIL_DATA[6])
 
-        self.button(self.SAVE)
+        self.fill_text_field(self.MONITORED_FOLDER, self.EMAIL_DATA[7])
+
+        self.send_enter_key(self.SAVE)
+
+        self.wait_button_clickable(self.BUTTON_NEXT)
+
+        self.click_button(self.BUTTON_NEXT)
+
+        self.send_enter_key(self.SAVE)
+
+        return self.EMAIL_DATA[0], self.EMAIL_DATA[1], self.EMAIL_DATA[3]
+
 
 
 

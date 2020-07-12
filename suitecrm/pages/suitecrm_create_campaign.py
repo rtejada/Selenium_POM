@@ -5,11 +5,10 @@ from random import randint
 
 class CreateNewCampaign(SuitecrmBasePage):
 
-    CAMPAIGNS = {'name_campaign': 'Traime un Amigo', 'status': 'Active', 'description': 'Disponibles para clientes de Selenium'}
+    CAMPAIGNS = {'name_campaign': 'SELENIUM-TEST', 'status': 'Active', 'description': 'Disponibles para clientes de Selenium'}
     QUOTE_CAMPAIGN = {'quote': '2000', 'actual_cost': '2500', 'expected_revenue': '5000', 'expected_cost': '3200',
                       'impressions': '7', 'objective': 'Conseguir rentabilidad', 'target_list_name': 'TA', 'type': 'test',
-                      'template_name': 'Case Creation', 'marketing_name': 'Campaña ', 'hour_date': '25/07/2020',
-                      'hour': '11', 'minute': '50', 'address_mail': 'Saint-Geniès-Bellevue@Toulose.fr'}
+                      'template_name': 'Case Creation', 'name_marketing': 'PROM ', 'hour': '11', 'minute': '50', 'address_mail': 'Saint-Geniès-Bellevue@Toulose.fr'}
 
     BUTTON_ALL = (By.LINK_TEXT, 'TODO')
     ACCESS_CAMPAIGN = (By.LINK_TEXT, 'Campañas')
@@ -28,24 +27,26 @@ class CreateNewCampaign(SuitecrmBasePage):
     NEW_TARGET_LIST = (By.ID, 'target_list_name')
     BUTTON_CREATE_TARGET = (By.XPATH, "//*[@id='step2']//div/input[@value='Crear']")
     TYPE_LIST = (By.ID, 'target_list_type')
-    RADIO_BUTTON = (By.ID, 'template_option_copy')
+    RADIO_BUTTON = (By.ID, 'wizform')
     NAME_TEMPLATE = (By.ID, 'template_id')
     SAVE = (By.ID, 'LBL_SAVE_EMAIL_TEMPLATE_BTN')
+
+    BUTTON_NEXT_ = (By.ID, 'wiz_submit_button')
     MARKETING_EMAIL = (By.ID, 'marketing_name')
-    PROGRAM_HOUR_DATE = (By.ID, 'date_start_date')
+    MARKETING_ACCOUNT = (By.ID, 'inbound_email_id')
+    PROGRAM_HOUR_DATE = (By.ID, 'date_start_trigger')
+    WINDOW_VISIBLE = (By.ID, 'date_start_trigger_div')
+    DATE = (By.ID, 'date_start_trigger_div_t_cell33')
     HOUR = (By.ID, 'date_start_hours')
     MINUTES = (By.ID, 'date_start_minutes')
+    FROM_NAME = (By.ID, 'from_name')
     FROM_ADDRESS = (By.ID, 'from_addr')
 
     def __init__(self, driver):
         super().__init__(driver)
         self.CAMPAIGNS['name_campaign'] = self.CAMPAIGNS['name_campaign'] + ' ' + str(randint(1, 90000000))
         self.QUOTE_CAMPAIGN['target_list_name'] = self.QUOTE_CAMPAIGN['target_list_name'] + ' ' + str(randint(1, 90000000))
-        self.QUOTE_CAMPAIGN['marketing_name'] = self.QUOTE_CAMPAIGN['marketing_name'] + ' ' + str(randint(1, 90000000))
-
-    def access_to_all(self):
-
-        self.menu_select_option(self.BUTTON_ALL, self.ACCESS_CAMPAIGN)
+        self.QUOTE_CAMPAIGN['name_marketing'] = self.QUOTE_CAMPAIGN['name_marketing'] + ' ' + str(randint(1, 90000000))
 
     def create_new_campaign(self):
 
@@ -87,31 +88,43 @@ class CreateNewCampaign(SuitecrmBasePage):
 
         self.click_button(self.BUTTON_CREATE_TARGET)
 
-        self.click_button(self.BUTTON_NEXT)
+        self.window_scroll_home()
+
+        self.click_button(self.BUTTON_NEXT_)
 
     def create_templates(self):
 
+        self.wait_selector_visible(self.WINDOW_VISIBLE)
+
         self.click_button(self.RADIO_BUTTON)
 
-        self.fill_select_name(self.NAME_TEMPLATE, self.QUOTE_CAMPAIGN['template_name'])
+        self.fill_select_by_text(self.NAME_TEMPLATE, self.QUOTE_CAMPAIGN['template_name'])
 
-        self.button(self.SAVE)
+        self.send_enter_key(self.SAVE)
 
         self.wait_button_clickable(self.BUTTON_NEXT)
 
         self.click_button(self.BUTTON_NEXT)
 
-    def create_marketing_email(self):
+    def create_marketing_email(self, email_name, sender_address, email_server):
 
-        self.fill_text_field(self.MARKETING_EMAIL, self.QUOTE_CAMPAIGN['marketing_name'])
+        self.fill_text_field(self.MARKETING_EMAIL, self.QUOTE_CAMPAIGN['name_marketing'])
 
-        self.fill_text_field(self.PROGRAM_HOUR_DATE, self.QUOTE_CAMPAIGN['hour_date'])
+        self.fill_select_by_text(self.MARKETING_ACCOUNT, email_name)
+
+        self.click_button(self.PROGRAM_HOUR_DATE)
+
+        self.wait_selector_visible(self.WINDOW_VISIBLE)
+
+        self.click_button(self.DATE)
 
         self.fill_select_field(self.HOUR, self.QUOTE_CAMPAIGN['hour'])
 
         self.fill_select_field(self.MINUTES, self.QUOTE_CAMPAIGN['minute'])
 
-        self.fill_text_field(self.FROM_ADDRESS, self.QUOTE_CAMPAIGN['from_address'])
+        self.fill_text_field(self.FROM_NAME, sender_address)
+
+        self.fill_text_field(self.FROM_ADDRESS, email_server)
 
         self.window_scroll_home()
 

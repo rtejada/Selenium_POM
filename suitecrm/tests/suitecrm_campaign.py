@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
 from pages.suitecrm_create_campaign import CreateNewCampaign
-from pages.configure_email import ConfigureEmail
+from pages.suitecrm_configure_email import ConfigureEmail
 from dotenv import load_dotenv
 import time
 
@@ -28,11 +28,11 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        create_email = ConfigureEmail(self.driver)
-        create_email.access_campaign_all()
-        create_email.configure_email()
+        configure_email = ConfigureEmail(self.driver)
+        configure_email.access_campaign_all()
+        email_name, sender_address, email_server = configure_email.configure_email()
 
         create_campaign = CreateNewCampaign(self.driver)
-        create_campaign.access_to_all()
         create_campaign.create_new_campaign()
-        time.sleep(1)
+        create_campaign.create_new_target_list()
+        create_campaign.create_marketing_email(email_name, sender_address, email_server)

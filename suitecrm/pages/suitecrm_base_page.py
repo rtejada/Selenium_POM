@@ -20,7 +20,7 @@ class SuitecrmBasePage:
         type_select = Select(element_select)
         type_select.select_by_value(text)
 
-    def fill_select_name(self, selector, text):
+    def fill_select_by_text(self, selector, text):
         element_select = self.driver.find_element(*selector)
         type_select = Select(element_select)
         type_select.select_by_visible_text(text)
@@ -35,7 +35,7 @@ class SuitecrmBasePage:
         element = self.driver.find_element(*selector)
         element.click()
 
-    def button(self, selector):
+    def send_enter_key(self, selector):
         save = self.driver.find_element(*selector)
         save.send_keys(Keys.ENTER)
 

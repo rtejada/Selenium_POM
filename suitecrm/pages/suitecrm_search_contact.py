@@ -14,6 +14,7 @@ class SearchContact(SuitecrmBasePage):
     BUTTON_ACTIONS = (By.XPATH, '//*[@id="tab-actions"]/a')
 
     def search_contact(self, contact_email, contact_name):
+
         self.wait_selector_visible(self.MENU_SALES)
 
         self.menu_select_option(self.MENU_SALES, self.ACCESS_CONTACT)
@@ -30,7 +31,7 @@ class SearchContact(SuitecrmBasePage):
 
         self.fill_text_field(self.BUTTON_NAME, contact_name)
 
-        self.button(self.SEARCH)
+        self.send_enter_key(self.SEARCH)
 
         self.click_button((By.PARTIAL_LINK_TEXT, contact_name))
 
