@@ -1,0 +1,21 @@
+{
+  "minute": "50",
+  "hour": "11",
+  "template_name": "Case Creation",
+  "target_list_name": "TA",
+  "name_campaign": "SELENIUM-TEST",
+  "type": "test",
+  "expected_cost": "3200",
+  "name_marketing": "PROM ",
+  "quote": "2000",
+  "status": "Active",
+  "address_mail": "Saint-Geniès-Bellevue@Toulose.fr",
+  "description": "Disponibles Solo para Clientes Selenium",
+  "impressions": "7",
+  "objective": "Conseguir Mas Rentabilidad",
+  "expected_revenue": "5000",
+  "actual_cost": "2500",
+  "text_link": "PS",
+  "url_traceability" : "https://www.w3schools.com/cssref/css_selectors.asp"
+
+}
