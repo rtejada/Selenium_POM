@@ -35,6 +35,7 @@ class SuitecrmBasePage:
         element = self.driver.find_element(*selector)
         element.click()
 
+
     def send_enter_key(self, selector):
         save = self.driver.find_element(*selector)
         save.send_keys(Keys.ENTER)

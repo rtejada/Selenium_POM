@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.suitecrm_base_page import SuitecrmBasePage
 import json
 from random import randint
+import time
 
 
 class CreateCampaignTargetGroupList(SuitecrmBasePage):
@@ -31,8 +32,11 @@ class CreateCampaignTargetGroupList(SuitecrmBasePage):
 
         self.click_button(self.BUTTON_CREATE_TARGET)
 
-        self.window_scroll_home()
+        time.sleep(3)
 
         self.click_button(self.BUTTON_NEXT)
 
-        self.wait_button_clickable(self.RADIO_BUTTON)
+
+        #self.wait_button_clickable(self.RADIO_BUTTON)
+
+

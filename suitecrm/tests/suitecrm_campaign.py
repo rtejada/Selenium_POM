@@ -46,3 +46,6 @@ class SuiteCrm(unittest.TestCase):
         create_number_email_marketing = CreateCampaignEmailMarketing(self.driver)
         create_number_email_marketing.create_marketing_email(email_name, sender_address, email_server)
 
+
+
+
