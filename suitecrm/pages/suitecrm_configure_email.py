@@ -19,7 +19,8 @@ class ConfigureEmail(SuitecrmBasePage):
     EMAIL_PASS = (By.ID, 'email_password')
     EMAIL_PORT = (By.ID, 'port')
     MONITORED_FOLDER = (By.ID, 'mailbox')
-    SAVE = (By.ID, 'wiz_submit_button')
+    SAVE_ID = 'wiz_submit_button'
+    SAVE = (By.ID, SAVE_ID)
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -28,10 +29,14 @@ class ConfigureEmail(SuitecrmBasePage):
         self.EMAIL_DATA = f.readlines()
         f.close()
 
-        self.EMAIL_DATA[0] = self.EMAIL_DATA[0] + str(randint(1, 90000000))
-        self.EMAIL_DATA[1] = str(randint(1, 90000000)) + self.EMAIL_DATA[1]
-        self.EMAIL_DATA[2] = str(randint(1, 90000000)) + self.EMAIL_DATA[2]
-        self.EMAIL_DATA[3] = str(randint(1, 90000000)) + self.EMAIL_DATA[3]
+        self.EMAIL_DATA[0] = self.EMAIL_DATA[0].replace('\n', '') + str(randint(1, 90000000))
+        self.EMAIL_DATA[1] = str(randint(1, 90000000)) + self.EMAIL_DATA[1].replace('\n', '')
+        self.EMAIL_DATA[2] = str(randint(1, 90000000)) + self.EMAIL_DATA[2].replace('\n', '')
+        self.EMAIL_DATA[3] = str(randint(1, 90000000)) + self.EMAIL_DATA[3].replace('\n', '')
+        self.EMAIL_DATA[4] = self.EMAIL_DATA[4].replace('\n', '')
+        self.EMAIL_DATA[5] = self.EMAIL_DATA[5].replace('\n', '')
+        self.EMAIL_DATA[6] = self.EMAIL_DATA[6].replace('\n', '')
+        self.EMAIL_DATA[7] = self.EMAIL_DATA[7].replace('\n', '')
         
     def access_campaign_all(self):
 
@@ -53,15 +58,13 @@ class ConfigureEmail(SuitecrmBasePage):
 
         self.fill_text_field(self.EMAIL_USER, self.EMAIL_DATA[3])
 
-        self.fill_select_field(self.PROTOCOL, self.EMAIL_DATA[4].replace('\n', ''))
+        self.fill_select_field(self.PROTOCOL, self.EMAIL_DATA[4])
 
         self.fill_text_field(self.EMAIL_PORT, self.EMAIL_DATA[6])
 
         self.fill_text_field(self.MONITORED_FOLDER, self.EMAIL_DATA[7])
 
-        self.send_enter_key(self.SAVE)
-
-        self.wait_button_clickable(self.BUTTON_NEXT)
+        self.click_by_javascript(self.SAVE_ID)
 
         self.click_button(self.BUTTON_NEXT)
 

@@ -18,6 +18,10 @@ class CreateCampaignEmailMarketing(SuitecrmBasePage):
     MINUTES = (By.ID, 'date_start_minutes')
     FROM_NAME = (By.ID, 'from_name')
     FROM_ADDRESS = (By.ID, 'from_addr')
+    NEW_WINDOWS = (By.ID, 'next_button_div')
+    EMAIL_NAME = 'SUITE-CRM- 35337354'
+    LAUNCH_EMAIL_SETTINGS = (By.LINK_TEXT, 'Lanzar Configuración de Email')
+    SAVE = (By.ID, 'wiz_submit_button')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -29,6 +33,8 @@ class CreateCampaignEmailMarketing(SuitecrmBasePage):
 
     def create_marketing_email(self, email_name, sender_address, email_server):
 
+        self.wait_button_clickable(self.MARKETING_EMAIL)
+
         self.fill_text_field(self.MARKETING_EMAIL, self.DATA_CAMPAIGN['name_marketing'])
 
         self.fill_select_by_text(self.MARKETING_ACCOUNT, email_name)
@@ -39,10 +45,6 @@ class CreateCampaignEmailMarketing(SuitecrmBasePage):
 
         self.click_button(self.DATE)
 
-        self.fill_select_field(self.HOUR, self.DATA_CAMPAIGN['hour'])
-
-        self.fill_select_field(self.MINUTES, self.DATA_CAMPAIGN['minute'])
-
         self.fill_text_field(self.FROM_NAME, sender_address)
 
         self.fill_text_field(self.FROM_ADDRESS, email_server)
@@ -50,3 +52,9 @@ class CreateCampaignEmailMarketing(SuitecrmBasePage):
         self.window_scroll_home()
 
         self.click_button(self.BUTTON_NEXT)
+
+        self.click_button(self.LAUNCH_EMAIL_SETTINGS)
+
+        self.click_button(self.BUTTON_NEXT)
+
+

@@ -30,9 +30,9 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        configure_email = ConfigureEmail(self.driver)
-        configure_email.access_campaign_all()
-        email_name, sender_address, email_server = configure_email.configure_email()
+        config_email = ConfigureEmail(self.driver)
+        config_email.access_campaign_all()
+        email_name, sender_address, email_server = config_email.configure_email()
 
         create_campaign_header = CreateCampaignHeader(self.driver)
         create_campaign_header.create_campaign_header()

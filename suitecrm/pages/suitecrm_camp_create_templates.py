@@ -3,7 +3,7 @@ from pages.suitecrm_base_page import SuitecrmBasePage
 import json
 from random import randint
 import os
-
+import time
 
 class CreateCampaignTemplates(SuitecrmBasePage):
     DATA_CAMPAIGN = ''
@@ -12,7 +12,8 @@ class CreateCampaignTemplates(SuitecrmBasePage):
     NAME_TEMPLATE = (By.ID, 'template_id')
     SAVE = (By.ID, 'LBL_CREATE_EMAIL_TEMPLATE_BTN')
     CREATE_NEW_TRACK = (By.ID, 'LBL_CREATE_TRACKER_BTN')
-    BUTTON_NEXT = (By.ID, 'next_button_div')
+    NEXT = 'wiz_next_button'
+    BUTTON_NEXT = (By.ID, NEXT)
     WINDOW_VISIBLE = (By.ID, 'templateManagerDialog')
     TEXT_LINK = (By.ID, 'url_text')
     TRACKER_URL_ADD = (By.ID, 'tracker_url_add')
@@ -26,7 +27,6 @@ class CreateCampaignTemplates(SuitecrmBasePage):
             self.DATA_CAMPAIGN = json.load(file)
 
         self.DATA_CAMPAIGN['text_link'] = self.DATA_CAMPAIGN['text_link'] + str(randint(222, 9999)) + ' '
-
 
     def create_templates(self):
 
@@ -49,10 +49,11 @@ class CreateCampaignTemplates(SuitecrmBasePage):
 
         file_add = self.driver.find_element(*self.SELECT_FILE)
         self.driver.execute_script("arguments[0].style.display = 'block';", file_add)
-        print(os.getcwd() + "/../data/imagen.png")
         file_add.send_keys(os.getenv("DATA_PATH")+'imagen.png')
 
         self.window_scroll_home()
 
-        self.click_button(self.BUTTON_NEXT)
+        self.wait_button_clickable(self.BUTTON_NEXT)
+
+        self.click_by_javascript(self.NEXT)
 

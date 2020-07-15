@@ -35,6 +35,9 @@ class SuitecrmBasePage:
         element = self.driver.find_element(*selector)
         element.click()
 
+    def click_by_javascript(self, id):
+
+        self.driver.execute_script('document.getElementById("' + id + '").click()')
 
     def send_enter_key(self, selector):
         save = self.driver.find_element(*selector)

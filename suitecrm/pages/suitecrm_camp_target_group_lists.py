@@ -37,6 +37,3 @@ class CreateCampaignTargetGroupList(SuitecrmBasePage):
         self.click_button(self.BUTTON_NEXT)
 
 
-        #self.wait_button_clickable(self.RADIO_BUTTON)
-
-
