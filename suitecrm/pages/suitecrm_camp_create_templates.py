@@ -3,7 +3,7 @@ from pages.suitecrm_base_page import SuitecrmBasePage
 import json
 from random import randint
 import os
-import time
+
 
 class CreateCampaignTemplates(SuitecrmBasePage):
     DATA_CAMPAIGN = ''

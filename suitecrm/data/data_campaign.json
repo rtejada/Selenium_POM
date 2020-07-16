@@ -1,6 +1,4 @@
 {
-  "minute": "50",
-  "hour": "11",
   "template_name": "Case Creation",
   "target_list_name": "TA",
   "name_campaign": "SELENIUM-TEST",
