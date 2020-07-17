@@ -8,22 +8,23 @@ import os
 import time
 
 
-class CreateNewOpportunity(SuitecrmBasePage, SuitecrmSiteSearch):
+class CreateNewOpportunity(SuitecrmBasePage):
 
     OPPORTUNITY = ''
     BUTTON_CREATE = (By.LINK_TEXT, 'Crear')
     CREATE_OPPORTUNITY = (By.LINK_TEXT, 'Crear Oportunidades')
     NAME_OPPORTUNITY = (By.ID, 'name')
-    SEARCH_ACCOUNT = (By.XPATH, '//*[@id="btn_account_name"]/span')
-    SEARCH_FOR_NAME = (By.ID, 'name_advanced')
-    SEARCH_BUTTON = (By.ID, 'search_form_submit')
-    WINDOW_DATE = (By.XPATH, '//*[@id="date_closed_trigger"]/span')
-    WINDOW_VISIBLE = (By.ID, 'date_closed_trigger_div')
+    WINDOW_VISIBLE = (By. ID, 'date_closed')
+    CLOSING_DATE = (By.ID, 'date_closed_trigger')
     DATE = (By.ID, 'date_closed_trigger_div_t_cell22')
     OPPORTUNITY_AMOUNT = (By.ID, 'amount')
     OPPORTUNITY_TYPE = (By.ID, 'opportunity_type')
     SALES_STAGE = (By.ID, 'sales_stage')
     LEAD_SOURCE = (By.ID, 'lead_source')
+
+    SEARCH_ACCOUNT = (By.ID, 'btn_account_name')
+    SEARCH_CAMPAIGN = (By.ID, 'btn_campaign_name')
+    SEARCH_FOR = (By.ID, 'name_advanced')
 
     CUSTOMER = ''
     MAIL_CUSTOMER = ''
@@ -56,13 +57,15 @@ class CreateNewOpportunity(SuitecrmBasePage, SuitecrmSiteSearch):
 
         self.fill_text_field(self.NAME_OPPORTUNITY, self.OPPORTUNITY['name_opportunity'])
 
-        results_window = SuitecrmSiteSearch(self.driver)
-        results_window.open_site_search()
-        results_window.search_for_name()
+        find_data_page = SuitecrmSiteSearch(self.driver)
+        find_data_page.selector_open_window = self.SEARCH_ACCOUNT
+        find_data_page.selector_search_field = self.SEARCH_FOR
+        find_data_page.search_query = self.CUSTOMER
+        find_data_page.open_site_search()
 
-        self.click_button(self.WINDOW_DATE)
+        self.click_button(self.CLOSING_DATE)
 
-        self.wait_selector_visible(self.WINDOW_VISIBLE)
+        self.wait_selector_visible(self.DATE)
 
         self.click_button(self.DATE)
 
@@ -74,6 +77,11 @@ class CreateNewOpportunity(SuitecrmBasePage, SuitecrmSiteSearch):
 
         self.fill_select_field(self.LEAD_SOURCE, self.OPPORTUNITY['customer_value'])
 
+        find_data_page = SuitecrmSiteSearch(self.driver)
+        find_data_page.selector_open_window = self.SEARCH_CAMPAIGN
+        find_data_page.selector_search_field = self.SEARCH_FOR
+        find_data_page.search_query = self.CAMPAIGN
+        find_data_page.open_site_search()
 
         time.sleep(10)
 

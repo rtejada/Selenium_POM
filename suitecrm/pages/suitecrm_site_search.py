@@ -4,46 +4,38 @@ from selenium.webdriver.common.by import By
 
 class SuitecrmSiteSearch:
 
+
+    SEARCH_BUTTON = (By.ID, 'search_form_submit')
+
     def __init__(self, driver: webdriver):
         # type driver: Chrome
 
         self.window_before = ''
         self.driver = driver
+        self.selector_open_window = ''
+        self.selector_search_field = ''
+        self.search_query = ''
         """:type: Chrome"""
 
-    def open_site_search(self, selector):
-        search = self.driver.find_element(*selector)
+    def open_site_search(self):
+        search = self.driver.find_element(*self.selector_open_window)
         self.window_before = self.driver.window_handles[0]
         search.click()
 
         window_after = self.driver.window_handles[1]
+
         self.driver.switch_to.window(window_after)
 
-    def search_for_name(self, selector, text):
-        element = self.driver.find_element(*selector)
+        element = self.driver.find_element(*self.selector_search_field)
         element.click()
         element.clear()
-        element.send_keys(text)
+        element.send_keys(self.search_query)
 
-        click_name = self.driver.find_element(By.LINK_TEXT, text)
+        button_search = self.driver.find_element(*self.SEARCH_BUTTON)
+        button_search.click()
+
+        click_name = self.driver.find_element(By.LINK_TEXT, self.search_query)
         click_name.click()
 
+        self.driver.switch_to.window(self.window_before)
 
-
-    '''
-    search = self.driver.find_element(*self.SEARCH_ACCOUNT)
-        window_before = self.driver.window_handles[0]
-        search.click()
-
-        window_after = self.driver.window_handles[1]
-        self.driver.switch_to.window(window_after)
-
-        self.fill_text_field(self.SEARCH_FOR_NAME, self.CUSTOMER)
-
-        self.click_button(self.SEARCH_BUTTON)
-
-        click_name = self.driver.find_element(By.LINK_TEXT, self.CUSTOMER)
-        click_name.click()
-
-        self.driver.switch_to.window(window_before)
-        '''
