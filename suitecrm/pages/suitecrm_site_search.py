@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 
 class SuitecrmSiteSearch:
 
-
     SEARCH_BUTTON = (By.ID, 'search_form_submit')
 
     def __init__(self, driver: webdriver):
@@ -34,7 +33,7 @@ class SuitecrmSiteSearch:
         button_search = self.driver.find_element(*self.SEARCH_BUTTON)
         button_search.click()
 
-        click_name = self.driver.find_element(By.LINK_TEXT, self.search_query)
+        click_name = self.driver.find_element(By.PARTIAL_LINK_TEXT, self.search_query)
         click_name.click()
 
         self.driver.switch_to.window(self.window_before)

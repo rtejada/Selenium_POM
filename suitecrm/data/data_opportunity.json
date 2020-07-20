@@ -15,5 +15,8 @@
   "description": "Explicit expectations available only for Selenium customers",
   "tel": "034-829875",
   "country": "Francia",
-  "city": "Saint-Bellevue"
+  "city": "Saint-Bellevue",
+  "next_step" : "As a next step, the system will be progressively rolled out to field offices",
+  "name_admin_advanced" : "Chris"
+
 }

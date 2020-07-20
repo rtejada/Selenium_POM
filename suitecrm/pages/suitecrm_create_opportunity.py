@@ -26,6 +26,11 @@ class CreateNewOpportunity(SuitecrmBasePage):
     SEARCH_CAMPAIGN = (By.ID, 'btn_campaign_name')
     SEARCH_FOR = (By.ID, 'name_advanced')
 
+    NEXT_STEP = (By.ID, 'next_step')
+    DESCRIPTION = (By.ID, 'description')
+    ASSIGNED_USER_NAME = (By.ID, 'btn_assigned_user_name')
+    USER = (By.ID, 'first_name_advanced')
+    SAVE = (By.ID, 'SAVE')
     CUSTOMER = ''
     MAIL_CUSTOMER = ''
     TELEPHONE = ''
@@ -83,7 +88,18 @@ class CreateNewOpportunity(SuitecrmBasePage):
         find_data_page.search_query = self.CAMPAIGN
         find_data_page.open_site_search()
 
-        time.sleep(10)
+        self.fill_text_field(self.NEXT_STEP, self.OPPORTUNITY['next_step'])
+        self.fill_text_field(self.DESCRIPTION, self.OPPORTUNITY['description'])
+
+        allocated_to = SuitecrmSiteSearch(self.driver)
+        allocated_to.selector_open_window = self.ASSIGNED_USER_NAME
+        allocated_to.selector_search_field = self.USER
+        allocated_to.search_query = self.OPPORTUNITY['name_admin_advanced']
+        allocated_to.open_site_search()
+
+        self.send_enter_key(self.SAVE)
+
+
 
 
 
