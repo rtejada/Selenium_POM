@@ -12,10 +12,10 @@ json.dump(opportunity, file)
 file.close()
 '''
 
-file = open('budget.csv')
+file = open('Suitecrm_budgets.csv')
 content = csv.reader(file, delimiter=',')
 BUDGETS = list(content)
 file.close()
 
-for row in range(len(BUDGETS)):
-    print(BUDGETS[row][0][1])
+print(BUDGETS[1][1])
+

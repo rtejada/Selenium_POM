@@ -14,6 +14,8 @@ class SuitecrmSiteSearch:
         self.selector_open_window = ''
         self.selector_search_field = ''
         self.search_query = ''
+        self.filled = False
+
         """:type: Chrome"""
 
     def open_site_search(self):
@@ -25,13 +27,15 @@ class SuitecrmSiteSearch:
 
         self.driver.switch_to.window(window_after)
 
-        element = self.driver.find_element(*self.selector_search_field)
-        element.click()
-        element.clear()
-        element.send_keys(self.search_query)
+        if not self.filled:
 
-        button_search = self.driver.find_element(*self.SEARCH_BUTTON)
-        button_search.click()
+            element = self.driver.find_element(*self.selector_search_field)
+            element.click()
+            element.clear()
+            element.send_keys(self.search_query)
+
+            button_search = self.driver.find_element(*self.SEARCH_BUTTON)
+            button_search.click()
 
         click_name = self.driver.find_element(By.PARTIAL_LINK_TEXT, self.search_query)
         click_name.click()

@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from random import randint
 import json
 import os
-import time
 
 
 class CreateNewOpportunity(SuitecrmBasePage):
