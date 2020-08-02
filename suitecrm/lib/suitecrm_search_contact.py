@@ -13,7 +13,7 @@ class SearchContact(SuitecrmBasePage):
     WINDOW_VISIBLE = (By.ID, 'searchDialog')
     BUTTON_ACTIONS = (By.XPATH, '//*[@id="tab-actions"]/a')
 
-    def search_contact(self, contact_email, contact_name):
+    def search_contact(self, name):
 
         self.wait_selector_visible(self.MENU_SALES)
 
@@ -29,15 +29,15 @@ class SearchContact(SuitecrmBasePage):
 
         self.wait_selector_visible(self.BUTTON_NAME)
 
-        self.fill_text_field(self.BUTTON_NAME, contact_name)
+        self.fill_text_field(self.BUTTON_NAME, name)
 
         self.send_enter_key(self.SEARCH)
 
-        self.click_button((By.PARTIAL_LINK_TEXT, contact_name))
+        self.click_button((By.PARTIAL_LINK_TEXT, name))
 
         self.wait_button_clickable(self.BUTTON_ACTIONS)
 
-
+        return name
 
 
 

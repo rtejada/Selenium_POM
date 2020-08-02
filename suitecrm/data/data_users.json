@@ -21,7 +21,11 @@
   "Country_of_address" : "London",
   "description" : "Shallan Davar is one of the main protagonists in The Stormlight Archive. Daughter of the recently deceased Brightlord Lin Davar of Jah Keved, Shallan pursued and received scholarly training as the ward of Jasnah Kholin.",
   "email" : "shallandavar@suitecrm.es",
-  "pass" : "sel"
+  "pass" : "sel",
+  "contact_name": "Toulouse",
+  "contact_last_name": "Tournefeuille 26642093",
+  "customer_name": "FRANÇAIS S.L 81754875"
+
 
 }
 

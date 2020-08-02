@@ -1,5 +1,5 @@
-from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
+from selenium.webdriver.common.by import By
 
 
 class SearchCustomer(SuitecrmBasePage):
@@ -12,7 +12,7 @@ class SearchCustomer(SuitecrmBasePage):
     BUTTON_NAME = (By.ID, 'name_basic')
     SEARCH = (By.ID, 'search_form_submit')
 
-    def search_customer(self, customer_email, customer_name):
+    def search_customer(self, customer):
 
         self.menu_select_option(self.MENU_SALES, self.ACCESS_ACCOUNT)
 
@@ -26,8 +26,12 @@ class SearchCustomer(SuitecrmBasePage):
 
         self.wait_selector_visible(self.BUTTON_NAME)
 
-        self.fill_text_field(self.BUTTON_NAME, customer_name)
+        self.fill_text_field(self.BUTTON_NAME, customer)
 
         self.send_enter_key(self.SEARCH)
 
-        self.click_button((By.LINK_TEXT, customer_name))
+        self.click_button((By.LINK_TEXT, customer))
+
+        return customer
+
+
