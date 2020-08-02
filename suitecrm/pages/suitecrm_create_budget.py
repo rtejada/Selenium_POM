@@ -1,5 +1,5 @@
-from pages.suitecrm_base_page import SuitecrmBasePage
-from pages.suitecrm_site_search import SuitecrmSiteSearch
+from lib.suitecrm_base_page import SuitecrmBasePage
+from lib.suitecrm_site_search import SuitecrmSiteSearch
 from selenium.webdriver.common.by import By
 import csv
 
@@ -38,7 +38,7 @@ class CreateNewBudget(SuitecrmBasePage):
         self.BUDGETS = list(content)
         file.close()
 
-    def access_budget(self):
+    def create(self):
 
         self.menu_select_option(self.ACCESS_HOME, self.ACCESS_BUDGET)
 

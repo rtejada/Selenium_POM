@@ -1,21 +1,20 @@
-from pages.suitecrm_base_page import SuitecrmBasePage
-from pages.suitecrm_site_search import SuitecrmSiteSearch
+from lib.suitecrm_base_page import SuitecrmBasePage
+from pages.suitecrm_user_profile import FillUserProfile
+from pages.suitecrm_employee_information import FillEmployeeInfo
 from selenium.webdriver.common.by import By
 import json
+from random import randint
 
-
-class CreateNewUser(SuitecrmBasePage):
+class CreateUser(SuitecrmBasePage):
 
     USERS = ''
     ACCESS_ADMIN = (By.XPATH, '//*[@id="with-label"]/span[2]')
     ADMINISTRATOR = (By.LINK_TEXT, 'Administrador')
-    USER_MANAGEMENT = (By.ID, 'user_management')
-    CREATE_NEW_USER = (By.LINK_TEXT, 'Crear Nuevo Usuario')
-    USER_NAME = (By.ID, 'user_name')
-    FIRST_NAME = (By.ID, 'first_name')
-    LAST_NAME = (By.ID, 'last_name')
-    STATUS = (By.ID, 'status')
-    USER_TYPE = (By.ID, 'UserType')
+    PWD = (By.ID, 'tab2')
+    NEW_PASS = (By.ID, 'new_password')
+    CONFIRM_PASS = (By.ID, 'confirm_pwd')
+
+    SAVE = (By.ID, 'SAVE_FOOTER')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -23,26 +22,31 @@ class CreateNewUser(SuitecrmBasePage):
         with open("../data/data_users.json") as file:
             self.USERS = json.load(file)
 
-    def access_administrator(self):
+        self.USERS['pass'] = self.USERS['pass'] + randint(1000, 2000)
+
+    def select_menu(self):
 
         self.menu_select_option(self.ACCESS_ADMIN, self.ADMINISTRATOR)
 
-    def create_new_user(self):
+    def fill_user_profile(self):
 
-        self.click_button(self.USER_MANAGEMENT)
+        user_profile = FillUserProfile(self.driver)
+        user_profile.fill()
 
-        self.wait_button_clickable(self.CREATE_NEW_USER)
+    def fill_employee_info(self):
 
-        self.click_button(self.CREATE_NEW_USER)
+        employee_info = FillEmployeeInfo(self.driver)
+        employee_info.fill()
 
-        self.wait_selector_visible(self.USER_NAME)
+    def fill_password(self):
 
-        self.fill_text_field(self.USER_NAME, self.USERS['user_name'])
+        self.window_scroll_home()
 
-        self.fill_text_field(self.FIRST_NAME, self.USERS['first_name'])
+        self.click_button(self.PWD)
 
-        self.fill_text_field(self.LAST_NAME, self.USERS['last_name'])
+        self.fill_text_field(self.NEW_PASS, self.USERS['pass'])
+        self.fill_text_field(self.CONFIRM_PASS, self.USERS['pass'])
 
-        self.fill_select_field(self.STATUS, self.USERS['Employee_Status'])
+    def save(self):
 
-        self.fill_select_by_text(self.USER_TYPE, self.USERS)
+        self.send_enter_key(self.SAVE)

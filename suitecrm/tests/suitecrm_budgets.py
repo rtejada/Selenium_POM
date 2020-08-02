@@ -27,4 +27,4 @@ class SuiteCrm(unittest.TestCase):
         login.login_user()
 
         create_budget = CreateNewBudget(self.driver)
-        create_budget.access_budget()
+        create_budget.create()

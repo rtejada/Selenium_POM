@@ -1,5 +1,5 @@
-from pages.suitecrm_base_page import SuitecrmBasePage
-from pages.suitecrm_site_search import SuitecrmSiteSearch
+from lib.suitecrm_base_page import SuitecrmBasePage
+from lib.suitecrm_site_search import SuitecrmSiteSearch
 from selenium.webdriver.common.by import By
 
 from random import randint

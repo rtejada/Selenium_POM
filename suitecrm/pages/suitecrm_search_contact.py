@@ -1,4 +1,4 @@
-from pages.suitecrm_base_page import SuitecrmBasePage
+from lib.suitecrm_base_page import SuitecrmBasePage
 from selenium.webdriver.common.by import By
 
 

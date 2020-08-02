@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from pages.suitecrm_base_page import SuitecrmBasePage
+from lib.suitecrm_base_page import SuitecrmBasePage
 import json
 from random import randint
 import os
