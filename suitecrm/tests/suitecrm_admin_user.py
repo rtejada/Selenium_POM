@@ -29,6 +29,8 @@ class SuiteCrm(unittest.TestCase):
 
         create_user = CreateUser(self.driver)
         create_user.select_menu()
-        create_user.fill_user_profile()
+        user_name, complete_name = create_user.fill_user_profile()
         create_user.fill_employee_info()
         create_user.save()
+
+        print(user_name, ' ', complete_name)

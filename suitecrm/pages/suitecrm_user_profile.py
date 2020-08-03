@@ -23,6 +23,9 @@ class FillUserProfile(SuitecrmBasePage):
         with open("../data/data_users.json") as file:
             self.USERS = json.load(file)
 
+        self.NAME = self.USERS['user_name']
+        self.SURNAMES = self.USERS['first_name'] + ' ' + self.USERS['last_name']
+
     def fill(self):
 
         self.click_button(self.USER_MANAGEMENT)
@@ -49,5 +52,7 @@ class FillUserProfile(SuitecrmBasePage):
         add_object.add_files()
 
         self.click_button(self.FACTOR_AUTH)
+
+        return self.NAME, self.SURNAMES
 
 

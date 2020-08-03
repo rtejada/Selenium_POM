@@ -68,15 +68,15 @@ class SuitecrmBasePage:
     def window_scroll(self):
         self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
 
-    def window_scroll_half(self):
+    def window_scroll_half(self, offset=500):
         #Si quieres bajar a algún nivel, usa esto, aquí he usado "1000", puedes variar según tu uso#
 
-        self.driver.execute_script("scrollBy(0,+500);")
+        self.driver.execute_script("scrollBy(0,+" + str(offset) + ");")
 
-    def window_scroll_home(self):
+    def window_scroll_home(self, offset=500):
         #Si quieres subir de nivel, usa esto, otra vez usé aquí "-500", puedes variar según su uso..
 
-        self.driver.execute_script("scrollBy(0,-500);")
+        self.driver.execute_script("scrollBy(0,-" + str(offset) + ");")
 
 
 

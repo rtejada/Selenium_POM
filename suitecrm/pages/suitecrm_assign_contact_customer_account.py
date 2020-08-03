@@ -26,18 +26,32 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
 
     def customer_assign_contact(self):
         find_data_customer = SearchCustomer(self.driver)
-        find_data_customer.search_customer(self.CUSTOMER_NAME)
+        customer = find_data_customer.search_customer(self.CUSTOMER_NAME)
 
         self.window_scroll()
 
+        self.wait_button_clickable(self.BUTTON_CONTACT)
+
         self.menu_select_option(self.BUTTON_CONTACT, self.ACCESS_SELECT)
 
-        self.wait_selector_visible(self.ADD_CONTACT)
+        self.wait_button_clickable(self.ADD_CONTACT)
 
-        find_data_page = SuitecrmSiteSearch(self.driver)
-        find_data_page.selector_open_window = self.ADD_CONTACT
-        find_data_page.selector_search_field = self.LAST_NAME
-        find_data_page.search_query = self.CONTACT_LAST_NAME
-        find_data_page.open_site_search()
+        select = self.driver.find_element(*self.ADD_CONTACT)
+        window_before = self.driver.window_handles[0]
+        select.click()
+
+        window_after = self.driver.window_handles[1]
+        self.driver.switch_to.window(window_after)
+
+        self.fill_text_field(self.LAST_NAME, self.CONTACT_LAST_NAME)
+
+        self.click_button(self.BUTTON_SEARCH)
+
+        self.window_scroll()
+
+        select_client = self.driver.find_element(By.PARTIAL_LINK_TEXT, self.CONTACT_LAST_NAME)
+        select_client.click()
+
+        self.driver.switch_to.window(window_before)
 
 

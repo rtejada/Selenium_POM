@@ -22,7 +22,7 @@ class CreateUser(SuitecrmBasePage):
         with open("../data/data_users.json") as file:
             self.USERS = json.load(file)
 
-        self.USERS['pass'] = self.USERS['pass'] + randint(1000, 2000)
+        self.USERS['pass'] = self.USERS['pass'] + str(randint(1000, 2000))
 
     def select_menu(self):
 
@@ -31,7 +31,9 @@ class CreateUser(SuitecrmBasePage):
     def fill_user_profile(self):
 
         user_profile = FillUserProfile(self.driver)
-        user_profile.fill()
+        user_name, complete_name = user_profile.fill()
+
+        return user_name, complete_name
 
     def fill_employee_info(self):
 
@@ -50,3 +52,5 @@ class CreateUser(SuitecrmBasePage):
     def save(self):
 
         self.send_enter_key(self.SAVE)
+
+
