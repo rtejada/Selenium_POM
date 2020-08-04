@@ -2,6 +2,7 @@ from lib.suitecrm_base_page import SuitecrmBasePage
 from lib.suitecrm_add_file import SuitecrmAdd
 from selenium.webdriver.common.by import By
 import json
+from random import randint
 
 
 class FillUserProfile(SuitecrmBasePage):
@@ -23,7 +24,9 @@ class FillUserProfile(SuitecrmBasePage):
         with open("../data/data_users.json") as file:
             self.USERS = json.load(file)
 
-        self.NAME = self.USERS['user_name']
+        self.NAME = self.USERS['user_name'] + ' ' + str(randint(10, 50))
+        self.FIRST = self.USERS['first_name'] + ' ' + str(randint(0, 10))
+        self.LAST = self.USERS['last_name'] + ' ' + str(randint(0, 10))
         self.SURNAMES = self.USERS['first_name'] + ' ' + self.USERS['last_name']
 
     def fill(self):
@@ -36,11 +39,11 @@ class FillUserProfile(SuitecrmBasePage):
 
         self.wait_selector_visible(self.USER_NAME)
 
-        self.fill_text_field(self.USER_NAME, self.USERS['user_name'])
+        self.fill_text_field(self.USER_NAME, self.NAME)
 
-        self.fill_text_field(self.FIRST_NAME, self.USERS['first_name'])
+        self.fill_text_field(self.FIRST_NAME, self.FIRST)
 
-        self.fill_text_field(self.LAST_NAME, self.USERS['last_name'])
+        self.fill_text_field(self.LAST_NAME, self.LAST)
 
         self.fill_select_field(self.STATUS, self.USERS['Employee_Status'])
 

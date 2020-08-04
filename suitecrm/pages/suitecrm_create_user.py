@@ -1,9 +1,11 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from pages.suitecrm_user_profile import FillUserProfile
 from pages.suitecrm_employee_information import FillEmployeeInfo
+from lib.suitecrm_search_users import SearchUsers
 from selenium.webdriver.common.by import By
 import json
 from random import randint
+
 
 class CreateUser(SuitecrmBasePage):
 
@@ -14,7 +16,9 @@ class CreateUser(SuitecrmBasePage):
     NEW_PASS = (By.ID, 'new_password')
     CONFIRM_PASS = (By.ID, 'confirm_pwd')
 
-    SAVE = (By.ID, 'SAVE_FOOTER')
+    SAVE = (By.ID, 'SAVE_HEADER')
+
+    FULL_NAME = (By.ID, 'full_name')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -52,5 +56,12 @@ class CreateUser(SuitecrmBasePage):
     def save(self):
 
         self.send_enter_key(self.SAVE)
+
+    def search_user(self, complete_name):
+
+        user = SearchUsers(self.driver)
+        user.search_user(complete_name)
+
+        #return username
 
 

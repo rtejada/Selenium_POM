@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_user_profile import FillUserProfile
 from pages.suitecrm_create_user import CreateUser
 
 
@@ -31,6 +30,9 @@ class SuiteCrm(unittest.TestCase):
         create_user.select_menu()
         user_name, complete_name = create_user.fill_user_profile()
         create_user.fill_employee_info()
+        create_user.fill_password()
         create_user.save()
+        create_user.search_user(complete_name)
 
-        print(user_name, ' ', complete_name)
+        #self.assertEqual(complete_name, username)
+
