@@ -24,10 +24,10 @@ class FillUserProfile(SuitecrmBasePage):
         with open("../data/data_users.json") as file:
             self.USERS = json.load(file)
 
-        self.NAME = self.USERS['user_name'] + ' ' + str(randint(10, 50))
-        self.FIRST = self.USERS['first_name'] + ' ' + str(randint(0, 10))
-        self.LAST = self.USERS['last_name'] + ' ' + str(randint(0, 10))
-        self.SURNAMES = self.USERS['first_name'] + ' ' + self.USERS['last_name']
+        self.NAME = self.USERS['user_name'] + '-' + str(randint(10, 50))
+        self.FIRST = self.USERS['first_name']
+        self.LAST = self.USERS['last_name'] + '-' + str(randint(0, 10))
+        self.SURNAMES = self.FIRST + ' ' + self.LAST
 
     def fill(self):
 
@@ -48,12 +48,12 @@ class FillUserProfile(SuitecrmBasePage):
         self.fill_select_field(self.STATUS, self.USERS['Employee_Status'])
 
         self.fill_select_by_text(self.USER_TYPE, self.USERS['Type_User'])
-
+        '''
         add_object = SuitecrmAdd(self.driver)
         add_object.select_file = self.SELECT_FILE
         add_object.file_name = 'comercial.png'
         add_object.add_files()
-
+        '''
         self.click_button(self.FACTOR_AUTH)
 
         return self.NAME, self.SURNAMES

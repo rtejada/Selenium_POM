@@ -60,8 +60,8 @@ class CreateUser(SuitecrmBasePage):
     def search_user(self, complete_name):
 
         user = SearchUsers(self.driver)
-        user.search_user(complete_name)
+        value = user.search_user(complete_name)
 
-        #return username
+        return value
 
 
