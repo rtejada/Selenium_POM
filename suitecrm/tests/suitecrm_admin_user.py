@@ -32,6 +32,6 @@ class SuiteCrm(unittest.TestCase):
         create_user.fill_employee_info()
         create_user.fill_password()
         create_user.save()
-        value = create_user.search_user(complete_name)
+        found = create_user.search_user(complete_name)
 
-        self.assertEqual(value, True)
+        self.assertTrue(found, 'El usuario '+complete_name+', no se ha creado')

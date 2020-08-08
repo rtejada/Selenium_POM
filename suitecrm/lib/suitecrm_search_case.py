@@ -29,6 +29,30 @@ class SearchCase(SuitecrmBasePage):
 
         self.send_enter_key(self.SEARCH)
 
+        '''
+        self.wait_selector_visible(self.press_filter)
+
+        self.click_button(self.press_filter)
+
+        self.wait_selector_visible(self.wait_window_visible)
+
+        self.click_button(self.press_quick_filter)
+
+        self.wait_selector_visible(self.selector_search_field)
+
+        self.fill_text_field(self.selector_search_field, user)
+
+        self.send_enter_key(self.search_query)
+
+        rows = len(self.driver.find_elements(By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr'))
+        col = len(self.driver.find_elements(By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr/td'))
+        for a in range(2, rows + 1):
+            for b in range(1, col + 1):
+                values = self.driver.find_element(By.XPATH,
+                                                  '// *[@id = "MassUpdate"]/div[3]/table/tbody/tr[' + str(a) + ']/td[' + str(b) + ']/b/a')
+                self.list_names.append(values.text)
+        '''
+
         rows = len(self.driver.find_elements(By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr/td'))
         print(rows)
 

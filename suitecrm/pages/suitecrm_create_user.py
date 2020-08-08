@@ -1,7 +1,7 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from pages.suitecrm_user_profile import FillUserProfile
 from pages.suitecrm_employee_information import FillEmployeeInfo
-from lib.suitecrm_search_users import SearchUsers
+from lib.suitecrm_search_options_window import SuitecrmSiteSearch
 from selenium.webdriver.common.by import By
 import json
 from random import randint
@@ -15,10 +15,13 @@ class CreateUser(SuitecrmBasePage):
     PWD = (By.ID, 'tab2')
     NEW_PASS = (By.ID, 'new_password')
     CONFIRM_PASS = (By.ID, 'confirm_pwd')
-
     SAVE = (By.ID, 'SAVE_HEADER')
-
     FULL_NAME = (By.ID, 'full_name')
+
+    VIEW_USERS = (By.LINK_TEXT, 'Ver Usuarios')
+    FILTER = (By.XPATH, "//a[@title = 'Filtro']")
+    TABLE_ROWS = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
+    NAME_USER = (By.XPATH, '//*[@id = "MassUpdate"]//div/table/tbody/')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -59,8 +62,11 @@ class CreateUser(SuitecrmBasePage):
 
     def search_user(self, complete_name):
 
-        user = SearchUsers(self.driver)
-        value = user.search_user(complete_name)
+        user = SuitecrmSiteSearch(self.driver)
+        user.access_menu = self.VIEW_USERS
+        user.press_filter = self.FILTER
+        user. table_rows = self.TABLE_ROWS
+        value = user.search_element(complete_name)
 
         return value
 

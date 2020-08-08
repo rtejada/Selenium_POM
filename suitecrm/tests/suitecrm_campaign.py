@@ -35,7 +35,7 @@ class SuiteCrm(unittest.TestCase):
         email_name, sender_address, email_server = config_email.configure_email()
 
         create_campaign_header = CreateCampaignHeader(self.driver)
-        create_campaign_header.create_campaign_header()
+        name_campaign = create_campaign_header.create_campaign_header()
 
         create_camp_target_list = CreateCampaignTargetGroupList(self.driver)
         create_camp_target_list.create_target_group_list()
@@ -45,6 +45,10 @@ class SuiteCrm(unittest.TestCase):
 
         create_number_email_marketing = CreateCampaignEmailMarketing(self.driver)
         create_number_email_marketing.create_marketing_email(email_name, sender_address, email_server)
+
+
+
+
 
 
 
