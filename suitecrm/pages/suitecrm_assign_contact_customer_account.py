@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
-from lib.DEPECATED_suitecrm_search_customer import SearchCustomer
+from lib.DEPRECATED_suitecrm_search_customer import SearchCustomer
 from lib.suitecrm_site_search import SuitecrmSiteSearch
 import json
 
