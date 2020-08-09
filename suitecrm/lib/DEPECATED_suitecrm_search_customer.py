@@ -2,6 +2,7 @@ from lib.suitecrm_base_page import SuitecrmBasePage
 from selenium.webdriver.common.by import By
 
 
+
 class SearchCustomer(SuitecrmBasePage):
 
     MENU_SALES = (By.LINK_TEXT, 'VENTAS')

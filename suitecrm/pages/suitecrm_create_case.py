@@ -1,6 +1,6 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from lib.suitecrm_site_search import SuitecrmSiteSearch
-from lib.suitecrm_search_case import SearchCase
+from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from selenium.webdriver.common.by import By
 
 from random import randint
@@ -24,6 +24,12 @@ class CreateCases(SuitecrmBasePage):
     SEARCH_USER_NAME = (By.ID, 'first_name_advanced')
     SAVE = (By.ID, 'SAVE')
     IFRAME = (By.ID, 'description_ifr')
+
+    VIEW_CASES = (By.LINK_TEXT, 'Ver Casos')
+    FILTER = (By.XPATH, "//a[@title = 'Filtro']")
+    TABLE_ROWS_SELECTOR = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
+    NAME_SELECTOR = '//*[@id = "MassUpdate"]//div/table/tbody/'
+    COL_SELECTOR = '/td[4]//a'
 
     CUSTOMER = ''
     USER_FIRST_NAME = ''
@@ -90,8 +96,13 @@ class CreateCases(SuitecrmBasePage):
 
     def search_case(self, title):
 
-        case = SearchCase(self.driver)
-        value = case.search_user(title)
+        user = SuitecrmSiteSearchElement(self.driver)
+        user.access_menu = self.VIEW_CASES
+        user.press_filter = self.FILTER
+        user.table_rows = self.TABLE_ROWS_SELECTOR
+        user.name_selector = self.NAME_SELECTOR
+        user.col_selector = self.COL_SELECTOR
+        value = user.search_element(title)
 
         return value
 

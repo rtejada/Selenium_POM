@@ -3,9 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_create_new_contact import CreateNewContact
-from lib.suitecrm_search_contact import SearchContact
-
+from pages.suitecrm_create_contact import CreateContact
 from dotenv import load_dotenv
 
 
@@ -28,16 +26,16 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        create_contact = CreateNewContact(self.driver)
-        create_contact.page_contact()
-        create_contact.create_new_contact()
+        contact = CreateContact(self.driver)
+        contact.page_contact()
+        email, complete_name = contact.create_contact()
 
-        contact_name = create_contact.get_contact_name()
+        found = contact.search_contact(complete_name)
 
-        search_contact = SearchContact(self.driver)
-        name = search_contact.search_contact(contact_name)
+        self.assertTrue(found, 'El Contacto ' + complete_name + ', no se ha creado')
 
-        self.assertEqual(contact_name, name)
+
+
 
 
 

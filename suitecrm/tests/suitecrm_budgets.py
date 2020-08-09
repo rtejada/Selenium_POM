@@ -27,4 +27,9 @@ class SuiteCrm(unittest.TestCase):
         login.login_user()
 
         create_budget = CreateNewBudget(self.driver)
-        create_budget.create()
+        create_budget.create_new_budget()
+        title_budget = create_budget.get_title()
+        found = create_budget.search_budget(title_budget)
+
+        self.assertTrue(found, 'El Presupuesto no ha sido creado')
+

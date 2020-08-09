@@ -1,7 +1,7 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from pages.suitecrm_user_profile import FillUserProfile
 from pages.suitecrm_employee_information import FillEmployeeInfo
-from lib.suitecrm_search_options_window import SuitecrmSiteSearch
+from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from selenium.webdriver.common.by import By
 import json
 from random import randint
@@ -20,8 +20,9 @@ class CreateUser(SuitecrmBasePage):
 
     VIEW_USERS = (By.LINK_TEXT, 'Ver Usuarios')
     FILTER = (By.XPATH, "//a[@title = 'Filtro']")
-    TABLE_ROWS = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
-    NAME_USER = (By.XPATH, '//*[@id = "MassUpdate"]//div/table/tbody/')
+    TABLE_ROWS_SELECTOR = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
+    NAME_SELECTOR = '//*[@id = "MassUpdate"]//div/table/tbody/'
+    COL_SELECTOR = '/td[3]//a'
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -62,10 +63,12 @@ class CreateUser(SuitecrmBasePage):
 
     def search_user(self, complete_name):
 
-        user = SuitecrmSiteSearch(self.driver)
+        user = SuitecrmSiteSearchElement(self.driver)
         user.access_menu = self.VIEW_USERS
         user.press_filter = self.FILTER
-        user. table_rows = self.TABLE_ROWS
+        user. table_rows = self.TABLE_ROWS_SELECTOR
+        user.name_selector = self.NAME_SELECTOR
+        user.col_selector = self.COL_SELECTOR
         value = user.search_element(complete_name)
 
         return value

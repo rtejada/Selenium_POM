@@ -29,6 +29,6 @@ class SuiteCrm(unittest.TestCase):
         cases = CreateCases(self.driver)
         cases.access_case()
         title_object = cases.new_case()
-        value = cases.search_case(title_object)
+        found = cases.search_case(title_object)
 
-        self.assertEqual(value, True)
+        self.assertTrue(found, 'El Caso ' + title_object + ', no se ha creado')

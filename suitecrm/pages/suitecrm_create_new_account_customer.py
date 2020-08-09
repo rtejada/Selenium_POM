@@ -3,7 +3,7 @@ from lib.suitecrm_base_page import SuitecrmBasePage
 from random import randint
 
 
-class CreateCustomerAccount(SuitecrmBasePage):
+class CreateNewCustomerAccount(SuitecrmBasePage):
 
     CUSTOMER_ACCOUNTS = {'type': 'Customer', 'type_industry': 'Communications', 'name': 'FRANÇAIS S.L', 'tel': '770-829858', 'web': 'www.blagnac.com', 'email': '@blagnac.es',
                 'address': '321 Alto Garona', 'city': 'Madrid', 'CP': '29545', 'country': 'España', 'description': 'Pruebas personales', 'annual_revenue': '1000000', 'employees': '10'}
@@ -25,17 +25,12 @@ class CreateCustomerAccount(SuitecrmBasePage):
 
     ANNUAL_REVENUE = (By.ID, 'annual_revenue')
     EMPLOYEES = (By.ID, 'employees')
-
     SAVE = (By.ID, 'SAVE')
 
     def __init__(self, driver):
         super().__init__(driver)
         self.CUSTOMER_ACCOUNTS['name'] = self.CUSTOMER_ACCOUNTS['name'] + ' ' + str(randint(1, 90000000))
         self.CUSTOMER_ACCOUNTS['email'] = str(randint(1, 90000000)) + (self.CUSTOMER_ACCOUNTS['email'])
-
-    def page_account(self):
-
-        self.menu_select_option(self.BUTTON_CREATE, self.CREATE_CONTACT)
 
     def create_customer_account(self):
 

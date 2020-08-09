@@ -3,8 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_create_customer_account import CreateCustomerAccount
-from lib.suitecrm_search_customer import SearchCustomer
+from pages.suitecrm_customer_account import CustomerAccount
 
 from dotenv import load_dotenv
 
@@ -28,13 +27,15 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        customer_account = CreateCustomerAccount(self.driver)
+        customer_account = CustomerAccount(self.driver)
         customer_account.page_account()
-        customer_account.create_customer_account()
+        email, account = customer_account.create_customer_account()
 
-        customer_name = customer_account.get_customer_name()
+        found = customer_account.search_customer(account)
 
-        search_customer = SearchCustomer(self.driver)
-        customer = search_customer.search_customer(customer_name)
+        self.assertTrue(found, 'La cuenta ' + account + ', no se ha creado')
 
-        self.assertEqual(customer_name, customer)
+
+
+
+
