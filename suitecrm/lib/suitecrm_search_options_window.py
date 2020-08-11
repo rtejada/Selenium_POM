@@ -12,6 +12,8 @@ class SuitecrmSiteSearchElement(SuitecrmBasePage):
 
     def search_element(self, search_item):
 
+        self.wait_button_clickable(self.access_option)
+
         self.click_button(self.access_option)
 
         self.wait_selector_visible(self.press_filter)

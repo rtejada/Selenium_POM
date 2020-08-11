@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_create_opportunity import CreateNewOpportunity
+from pages.suitecrm_opportunity import CreateOpportunity
 
 
 class SuiteCrm(unittest.TestCase):
@@ -26,8 +26,12 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        create_opportunity = CreateNewOpportunity(self.driver)
-        create_opportunity.access_opportunity()
-        create_opportunity.create_new_opportunity()
+        create_opportunity = CreateOpportunity(self.driver)
+        create_opportunity.access()
+        name_opportunity = create_opportunity.create()
+        found = create_opportunity.search(name_opportunity)
+
+        self.assertTrue(found, 'La Oportunidad no se ha creado')
+
 
 

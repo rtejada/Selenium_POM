@@ -64,6 +64,8 @@ class CreateCampaignHeader(SuitecrmBasePage):
 
         self.click_button(self.BUTTON_NEXT)
 
+    def get_campaign(self):
+
         return self.DATA_CAMPAIGN['name_campaign']
 
 

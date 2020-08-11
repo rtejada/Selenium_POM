@@ -3,11 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_create_campaign_header import CreateCampaignHeader
-from pages.suitecrm_camp_create_templates import CreateCampaignTemplates
-from pages.suitecrm_camp_target_group_lists import CreateCampaignTargetGroupList
-from pages.suitecrm_camp_number_email_marketing import CreateCampaignEmailMarketing
-from pages.suitecrm_configure_email import ConfigureEmail
+from pages.suitecrm_create_campaign import CreateCampaign
 from dotenv import load_dotenv
 
 
@@ -30,21 +26,15 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        config_email = ConfigureEmail(self.driver)
-        config_email.access_campaign_all()
-        email_name, sender_address, email_server = config_email.configure_email()
+        campaign = CreateCampaign(self.driver)
+        email_name, sender_address, email_server = campaign.configure_email()
+        name_campaign = campaign.campaign_header()
+        campaign.campaign_target_list()
+        campaign.campaign_templates()
+        campaign.campaign_email_marketing(email_name, sender_address, email_server)
+        found = campaign.search_campaign(name_campaign)
 
-        create_campaign_header = CreateCampaignHeader(self.driver)
-        name_campaign = create_campaign_header.create_campaign_header()
-
-        create_camp_target_list = CreateCampaignTargetGroupList(self.driver)
-        create_camp_target_list.create_target_group_list()
-
-        create_camp_templates = CreateCampaignTemplates(self.driver)
-        create_camp_templates.create_templates()
-
-        create_number_email_marketing = CreateCampaignEmailMarketing(self.driver)
-        create_number_email_marketing.create_marketing_email(email_name, sender_address, email_server)
+        self.assertTrue(found, 'La campaña' + name_campaign + 'no se ha creado')
 
 
 

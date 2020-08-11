@@ -1,7 +1,6 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from lib.suitecrm_site_search import SuitecrmSiteSearch
 from selenium.webdriver.common.by import By
-
 from random import randint
 import json
 import os
@@ -30,6 +29,7 @@ class CreateNewOpportunity(SuitecrmBasePage):
     ASSIGNED_USER_NAME = (By.ID, 'btn_assigned_user_name')
     USER = (By.ID, 'first_name_advanced')
     SAVE = (By.ID, 'SAVE')
+
     CUSTOMER = ''
     MAIL_CUSTOMER = ''
     TELEPHONE = ''
@@ -53,11 +53,7 @@ class CreateNewOpportunity(SuitecrmBasePage):
         self.OPPORTUNITY['name_opportunity'] = self.OPPORTUNITY['name_opportunity'] + '-' + str(randint(1000, 2000))
         self.OPPORTUNITY['email'] = str(randint(1000, 2000)) + (self.OPPORTUNITY['email'])
 
-    def access_opportunity(self):
-
-        self.menu_select_option(self.BUTTON_CREATE, self.CREATE_OPPORTUNITY)
-
-    def create_new_opportunity(self):
+    def create(self):
 
         self.fill_text_field(self.NAME_OPPORTUNITY, self.OPPORTUNITY['name_opportunity'])
 
@@ -98,10 +94,6 @@ class CreateNewOpportunity(SuitecrmBasePage):
 
         self.send_enter_key(self.SAVE)
 
+    def get_name(self):
 
-
-
-
-
-
-
+        return self.OPPORTUNITY['name_opportunity']

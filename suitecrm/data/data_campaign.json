@@ -1,7 +1,7 @@
 {
   "template_name": "Case Creation",
   "target_list_name": "TA",
-  "name_campaign": "SELENIUM-TEST",
+  "name_campaign": "TEST-",
   "type": "test",
   "expected_cost": "3200",
   "name_marketing": "PROM ",
