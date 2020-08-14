@@ -6,24 +6,31 @@ import json
 
 
 class CreateNewMeeting(SuitecrmBasePage):
-    
+
+    LIST_INVITEES = ['invitees_add_1', 'invitees_add_2', 'invitees_add_3', 'invitees_add_4']
+    INVITE_NAME = ''
     LIST_MEETING = ''
     BUTTON_ALL = (By.LINK_TEXT, 'TODO')
     MEETING = (By.LINK_TEXT, 'Reuniones')
     SCHEDULE_MEETING = (By.LINK_TEXT, 'Programar Reunión')
     SUBJECT = (By.ID, 'name')
+    START = (By.ID, 'date_start_trigger')
+    CALENDAR_START_DAY = (By.XPATH, '//*[@id="date_start_trigger_div_t_cell36"]/a')
+    NEXT_MONTH = (By.XPATH, '//*[@id="date_end_trigger_div_t"]/thead/tr/th/div/a[3]')
+    END = (By.ID, 'date_end_trigger')
+    END_DATE = (By.XPATH, '//*[@id="date_end_trigger_div_t_cell29"]/a')
 
-    TYPE_CAMPAIGN = (By.LINK_TEXT, 'Email')
-    NAME_CAMPAIGN = (By.ID, 'name')
-    DESCRIPTION = (By.ID, 'wiz_content')
-    STATUS = (By.ID, 'status')
-    QUOTE = (By.ID, 'budget')
-    ACTUAL_COST = (By.ID, 'actual_cost')
-    EXPECTED_REVENUE = (By.ID, 'expected_revenue')
-    EXPECTED_COST = (By.ID, 'expected_cost')
-    IMPRESSIONS = (By.ID, 'impressions')
-    OBJECTIVE = (By.ID, 'objective')
-    BUTTON_NEXT = (By.ID, 'wiz_next_button')
+    LINK_CUSTOMER = (By.ID, 'btn_parent_name')
+    NAME_ACCOUNT = (By.ID, 'name_advanced')
+    ASSIGNED_USER = (By.ID, 'btn_assigned_user_name')
+    USER_NAME = (By.ID, 'first_name_advanced')
+
+    LOCATION = (By.ID, 'location')
+    DESCRIPTION = (By.ID, 'description')
+    PARTICIPANTS = (By.ID, 'search_first_name')
+    SEARCH = (By.ID, 'invitees_search')
+    ADD_FIRST_INVITE = (By.ID, 'invitees_add_1')
+    SAVE_MEETING = (By.NAME, 'button')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -31,11 +38,11 @@ class CreateNewMeeting(SuitecrmBasePage):
         with open("../data/data_users.json") as file:
             self.LIST_MEETING = json.load(file)
 
-        self.LIST_MEETING['subject'] = self.LIST_MEETING['subject'] + str(randint(500, 1000))
-
-        self.LIST_MEETING['target_list_name'] = self.LIST_MEETING['target_list_name'] + ' ' + str(
-            randint(1, 90000000))
-        self.LIST_MEETING['name_marketing'] = self.LIST_MEETING['name_marketing'] + ' ' + str(randint(1, 90000000))
+        self.SUBJECT_MEETING = self.LIST_MEETING['subject'] + str(randint(500, 1000))
+        self.CUSTOMER = self.LIST_MEETING['customer_name']
+        self.DESCRIPTION_MEETING = self.LIST_MEETING['description']
+        self.LOCAL = self.LIST_MEETING['state_prov_address']
+        self.USER = self.LIST_MEETING['name_assistance']
 
     def create(self):
 
@@ -44,5 +51,59 @@ class CreateNewMeeting(SuitecrmBasePage):
         self.wait_selector_visible(self.SCHEDULE_MEETING)
 
         self.click_button(self.SCHEDULE_MEETING)
+
+        self.wait_selector_visible(self.SUBJECT)
+
+        self.fill_text_field(self.SUBJECT, self.SCHEDULE_MEETING)
+
+        self.click_button(self.START)
+
+        self.wait_button_clickable(self.CALENDAR_START_DAY)
+
+        self.click_button(self.CALENDAR_START_DAY)
+
+        self.click_button(self.END)
+
+        self.wait_button_clickable(self.END_DATE)
+
+        self.click_button(self.NEXT_MONTH)
+
+        self.click_button(self.END_DATE)
+
+        find_data_page = SuitecrmSiteSearch(self.driver)
+        find_data_page.selector_open_window = self.LINK_CUSTOMER
+        find_data_page.selector_search_field = self.NAME_ACCOUNT
+        find_data_page.search_query = self.CUSTOMER
+        find_data_page.open_site_search()
+
+        self.fill_text_field(self.LOCATION, self.LOCAL)
+        self.fill_text_field(self.DESCRIPTION, self.DESCRIPTION_MEETING)
+
+        find_data_page = SuitecrmSiteSearch(self.driver)
+        find_data_page.selector_open_window = self.ASSIGNED_USER
+        find_data_page.selector_search_field = self.USER_NAME
+        find_data_page.search_query = self.USER
+        find_data_page.open_site_search()
+
+        self.click_button(self.SEARCH)
+
+        self.wait_button_clickable(self.ADD_FIRST_INVITE)
+
+        self.window_scroll_half()
+
+        for invites in self.LIST_INVITEES:
+            self.INVITE_NAME = (By.ID, invites)
+            self.click_button(self.INVITE_NAME)
+
+        self.window_scroll_home()
+
+        self.send_enter_key(self.SAVE_MEETING)
+
+
+
+
+
+
+
 
         

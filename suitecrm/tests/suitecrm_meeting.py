@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
+from pages.suitecrm_create_meeting import CreateNewMeeting
 
 
 class SuiteCrm(unittest.TestCase):
@@ -24,4 +25,7 @@ class SuiteCrm(unittest.TestCase):
 
         login = LoginPage(self.driver)
         login.login_user()
+
+        meeting = CreateNewMeeting(self.driver)
+        meeting.create()
 

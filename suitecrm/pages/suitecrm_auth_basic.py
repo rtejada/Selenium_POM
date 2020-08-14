@@ -7,15 +7,15 @@ class AuthBasicPage(SuitecrmBasePage):
     PWD = ''
     URL_AUTH_BASIC = ''
 
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.load_variables()
+
     def load_variables(self):
 
         self.USER = os.getenv("AUTH_BASIC_USER")
         self.PWD = os.getenv("AUTH_BASIC_PWD")
         self.URL_AUTH_BASIC = os.getenv("URL_AUTH_BASIC")
-
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.load_variables()
 
     def authenticate(self):
 

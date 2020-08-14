@@ -13,25 +13,26 @@ class LoginPage(SuitecrmBasePage):
     USERNAME = ''
     USERNAME_PWD = ''
 
-    def load_variables(self):
-
-        self.USERNAME = os.getenv("USERNAME")
-        self.USERNAME_PWD = os.getenv("USERNAME_PWD")
-
     def __init__(self, driver):
 
         super().__init__(driver)
         self.load_variables()
 
+    def load_variables(self):
+
+        self.USERNAME = os.getenv("USERNAME")
+        self.USERNAME_PWD = os.getenv("USERNAME_PWD")
+
     def login_user(self):
+
         user = self.driver.find_element(*self.USER_NAME)
         user.click()
-
         user.send_keys(self.USERNAME)
+
         pwd = self.driver.find_element(*self.USER_PDW)
         pwd.click()
-
         pwd.send_keys(self.USERNAME_PWD)
+
         button_init = self.driver.find_element(*self.BUTTON_SIGN_IN)
         button_init.send_keys(Keys.ENTER)
 
