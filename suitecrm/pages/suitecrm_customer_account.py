@@ -31,11 +31,12 @@ class CustomerAccount(SuitecrmBasePage):
     def search_customer(self, account):
 
         customer = SuitecrmSiteSearchElement(self.driver)
-        customer.access_menu = self.ACCOUNTS
+        customer.access_option = self.ACCOUNTS
         customer.press_filter = self.FILTER
-        customer.table_rows = self.TABLE_ROWS_SELECTOR
+        customer.table_rows_selector = self.TABLE_ROWS_SELECTOR
         customer.name_selector = self.NAME_SELECTOR
         customer.col_selector = self.COL_SELECTOR
         value = customer.search_element(account)
 
         return value
+

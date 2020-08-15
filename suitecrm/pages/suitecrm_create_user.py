@@ -64,13 +64,11 @@ class CreateUser(SuitecrmBasePage):
     def search_user(self, complete_name):
 
         user = SuitecrmSiteSearchElement(self.driver)
-        user.access_menu = self.VIEW_USERS
+        user.access_option = self.VIEW_USERS
         user.press_filter = self.FILTER
-        user. table_rows = self.TABLE_ROWS_SELECTOR
+        user.table_rows_selector = self.TABLE_ROWS_SELECTOR
         user.name_selector = self.NAME_SELECTOR
         user.col_selector = self.COL_SELECTOR
         value = user.search_element(complete_name)
 
         return value
-
-

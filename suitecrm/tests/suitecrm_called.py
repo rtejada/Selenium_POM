@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_create_meeting import CreateNewMeeting
+from pages.suitecrm_create_call import CreateCall
 
 
 class SuiteCrm(unittest.TestCase):
@@ -16,9 +16,6 @@ class SuiteCrm(unittest.TestCase):
         self.driver = webdriver.Chrome(options=options)
         load_dotenv()
 
-    def tearDown(self):
-        self.driver.close()
-
     def test_suitecrm(self):
         auth_basic = AuthBasicPage(self.driver)
         auth_basic.authenticate()
@@ -26,10 +23,16 @@ class SuiteCrm(unittest.TestCase):
         login = LoginPage(self.driver)
         login.login_user()
 
-        meeting = CreateNewMeeting(self.driver)
-        meeting.create()
-        subject = meeting.get_meeting()
-        found = meeting.search_meeting(subject)
+        called = CreateCall(self.driver)
+        called.log_call()
+        call_subject = called.get_call()
+        found = called.search_call(call_subject)
 
         self.assertTrue(found, 'La Reunion no ha sido creada')
 
+    def tearDown(self):
+        self.driver.close()
+
+
+if __name__ == '__main__':
+    unittest.main()
