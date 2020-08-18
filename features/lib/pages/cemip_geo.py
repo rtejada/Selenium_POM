@@ -1,8 +1,7 @@
-
 from selenium.webdriver.common.by import By
-from pages.cemip_base_page import CualEsMiIpBasePage
-
+from lib.pages.cemip_base_page import CualEsMiIpBasePage
 from lib.ip import IP
+
 
 class CualEsMiIpGeo(CualEsMiIpBasePage):
 
@@ -29,7 +28,7 @@ class CualEsMiIpGeo(CualEsMiIpBasePage):
         ip = IP()
 
         ip.country = data[1]
-        ip.city = data[3]
+        ip.city = self.normalize(data[3])
 
         lat = float(data[5][0:8])
         ip.lat = round(lat, 4)

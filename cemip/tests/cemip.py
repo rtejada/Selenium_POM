@@ -13,7 +13,6 @@ class CemipPOM(unittest.TestCase):
         self.driver = webdriver.Chrome()
         load_dotenv()
 
-
     def tearDown(self):
         self.driver.close()
 

@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from lib.ip import IP
-from pages.cemip_base_page import CualEsMiIpBasePage
+from lib.pages.cemip_base_page import CualEsMiIpBasePage
 import os
 
 
@@ -34,7 +34,7 @@ class CualEsMiIpMaxMind(CualEsMiIpBasePage):
 
         city_nation = data_maxmind[2]
         ip.country = city_nation[26:31]
-        ip.city = city_nation[0:8]
+        ip.city = self.normalize(city_nation[0:8])
         longitude_latitude = data_maxmind[5]
         ip.lat = float(longitude_latitude[0:7])
         ip.lon = float(longitude_latitude[-7:])
