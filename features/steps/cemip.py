@@ -9,8 +9,6 @@ import os
 use_step_matcher("re")
 
 
-
-
 @given("Acceder a CualEsMiIp")
 def home_cemip(context):
     """
