@@ -8,11 +8,7 @@ from lib.suitecrm_open_chrome_driver import *
 class SuiteCrm(unittest.TestCase):
 
     def setUp(self):
-        options = Options()
-        options.add_argument("--incognito")
-        options.add_argument("--start-maximized")
-        self.driver = webdriver.Chrome(options=options)
-        load_dotenv()
+        self.driver = get_driver()
 
     def tearDown(self):
         self.driver.close()
