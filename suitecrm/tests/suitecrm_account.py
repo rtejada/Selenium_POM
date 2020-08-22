@@ -29,7 +29,7 @@ class SuiteCrm(unittest.TestCase):
         customer_account.page_account()
         email, account = customer_account.create_customer_account()
 
-        found = customer_account.search_customer(account)
+        found = customer_account.search_account(account)
 
         self.assertTrue(found, 'La cuenta ' + account + ', no se ha creado')
 

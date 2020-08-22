@@ -1,10 +1,9 @@
 import unittest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
 from pages.suitecrm_assign_contact_customer_account import AssignContactCustomerAccount
 from lib.suitecrm_open_chrome_driver import *
+
 
 class SuiteCrm(unittest.TestCase):
 

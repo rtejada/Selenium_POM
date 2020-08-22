@@ -12,7 +12,7 @@ class SearchUsers(SuitecrmBasePage):
     visible_selector = ''
     contact_name = ''
 
-    def search_user(self, user):
+    def search_user(self, item):
 
         self.wait_button_clickable(self.access_option)
 
@@ -28,7 +28,7 @@ class SearchUsers(SuitecrmBasePage):
 
         self.wait_selector_visible(self.contact_name)
 
-        self.fill_text_field(self.contact_name, user)
+        self.fill_text_field(self.contact_name, item)
 
         self.send_enter_key(self.SEARCH)
 

@@ -1,7 +1,7 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from pages.suitecrm_user_profile import FillUserProfile
 from pages.suitecrm_employee_information import FillEmployeeInfo
-from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
+from lib.suitecrm_search_items import SearchUsers
 from selenium.webdriver.common.by import By
 import json
 import os
@@ -21,9 +21,10 @@ class CreateUser(SuitecrmBasePage):
 
     VIEW_USERS = (By.LINK_TEXT, 'Ver Usuarios')
     FILTER = (By.XPATH, "//a[@title = 'Filtro']")
-    TABLE_ROWS_SELECTOR = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
-    NAME_SELECTOR = '//*[@id = "MassUpdate"]//div/table/tbody/'
-    COL_SELECTOR = '/td[3]//a'
+    RAPID_FILTER = (By.LINK_TEXT, 'Filtro rápido')
+    WINDOW_VISIBLE = (By.ID, 'searchDialog')
+    BUTTON_NAME = (By.ID, 'search_name_basic')
+    SEARCH = (By.ID, 'search_form_submit')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -64,12 +65,12 @@ class CreateUser(SuitecrmBasePage):
 
     def search_user(self, complete_name):
 
-        user = SuitecrmSiteSearchElement(self.driver)
-        user.access_option = self.VIEW_USERS
-        user.press_filter = self.FILTER
-        user.table_rows_selector = self.TABLE_ROWS_SELECTOR
-        user.name_selector = self.NAME_SELECTOR
-        user.col_selector = self.COL_SELECTOR
-        value = user.search_element(complete_name)
+        search_user = SearchUsers(self.driver)
+        search_user.access_option = self.VIEW_USERS
+        search_user.press_filter = self.FILTER
+        search_user.press_rapid_filter = self.RAPID_FILTER
+        search_user.visible_selector = self.WINDOW_VISIBLE
+        search_user.contact_name = self.BUTTON_NAME
+        value = search_user.search_user(complete_name)
 
         return value

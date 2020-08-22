@@ -1,6 +1,6 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
-from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from pages.suitecrm_create_new_opportunity import CreateNewOpportunity
+from lib.suitecrm_search_items import SearchUsers
 from selenium.webdriver.common.by import By
 
 
@@ -12,9 +12,10 @@ class CreateOpportunity(SuitecrmBasePage):
 
     VIEW_OPPORTUNITY = (By.LINK_TEXT, 'Ver Oportunidades')
     FILTER = (By.XPATH, "//a[@title = 'Filtro']")
-    TABLE_ROWS_SELECTOR = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
-    NAME_SELECTOR = '//*[@id = "MassUpdate"]//div/table/tbody/'
-    COL_SELECTOR = '/td[3]//a'
+    RAPID_FILTER = (By.LINK_TEXT, 'Filtro rápido')
+    WINDOW_VISIBLE = (By.ID, 'searchDialog')
+    BUTTON_NAME = (By.ID, 'name_basic')
+    SEARCH = (By.ID, 'search_form_submit')
 
     def access(self):
 
@@ -29,15 +30,17 @@ class CreateOpportunity(SuitecrmBasePage):
         return name
 
     def search(self, name_opportunity):
-        search_contact = SuitecrmSiteSearchElement(self.driver)
-        search_contact.access_option = self.VIEW_OPPORTUNITY
-        search_contact.press_filter = self.FILTER
-        search_contact.table_rows_selector = self.TABLE_ROWS_SELECTOR
-        search_contact.col_selector = self.COL_SELECTOR
-        search_contact.name_selector = self.NAME_SELECTOR
-        value = search_contact.search_element(name_opportunity)
 
+        search_opportunity = SearchUsers(self.driver)
+        search_opportunity.access_option = self.VIEW_OPPORTUNITY
+        search_opportunity.press_filter = self.FILTER
+        search_opportunity.press_rapid_filter = self.RAPID_FILTER
+        search_opportunity.visible_selector = self.WINDOW_VISIBLE
+        search_opportunity.contact_name = self.BUTTON_NAME
+        value = search_opportunity.search_user(name_opportunity)
         return value
+
+
 
 
 

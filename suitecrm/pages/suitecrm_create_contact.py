@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
-from lib.suitecrm_search_users import SearchUsers
+from lib.suitecrm_search_items import SearchUsers
 from pages.suitecrm_create_new_contact import CreateNewContact
 
 
