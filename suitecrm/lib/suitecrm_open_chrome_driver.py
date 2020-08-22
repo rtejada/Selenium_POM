@@ -9,7 +9,7 @@ def get_driver():
     load_dotenv(os.getcwd() + "/tests/.env")
 
     arguments = os.getenv('CHROME_ARGS')
-    args = arguments.split(",")
+    args = arguments.split(";")
     options = Options()
     for i in args:
         options.add_argument(i)
