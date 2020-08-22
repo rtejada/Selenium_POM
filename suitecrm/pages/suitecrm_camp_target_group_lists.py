@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
 import json
+import os
 from random import randint
 import time
 
@@ -19,7 +20,7 @@ class CreateCampaignTargetGroupList(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_campaign.json") as file:
+        with open(os.getcwd() + "/data/data_campaign.json") as file:
             self.DATA_CAMPAIGN = json.load(file)
 
         self.DATA_CAMPAIGN['target_list_name'] = self.DATA_CAMPAIGN['target_list_name'] + str(randint(1, 50000))

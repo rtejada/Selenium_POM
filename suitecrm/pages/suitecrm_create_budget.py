@@ -3,6 +3,7 @@ from lib.suitecrm_site_search import SuitecrmSiteSearch
 from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from selenium.webdriver.common.by import By
 import csv
+import os
 from random import randint
 
 
@@ -22,7 +23,7 @@ class CreateNewBudget(SuitecrmBasePage):
     VALUE_STAGE = 'On Hold'
     APPROVAL_ISSUE = (By.ID, 'approval_issue')
     NAME_ACCOUNT = (By.ID, 'btn_billing_account')
-
+    SEARCH_ACCOUNT = (By.ID, 'name_advanced')
     SHIPPING_AMOUNT = (By.ID, 'shipping_amount')
     SHIPPING_TAX = (By.ID, 'shipping_tax')
     SAVE = (By.ID, 'SAVE')
@@ -36,10 +37,11 @@ class CreateNewBudget(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        file = open('../data/Suitecrm_budgets.csv')
+        file = open(os.getcwd() + "/data/Suitecrm_budgets.csv")
         content = csv.reader(file, delimiter=',')
         self.BUDGETS = list(content)
         file.close()
+
         self.TITLE = self.BUDGETS[1][0] + '-' + str(randint(100, 800))
 
     def create_new_budget(self):
@@ -72,7 +74,8 @@ class CreateNewBudget(SuitecrmBasePage):
 
         find_data_page = SuitecrmSiteSearch(self.driver)
         find_data_page.selector_open_window = self.NAME_ACCOUNT
-        find_data_page.filled = True
+        find_data_page.selector_search_field = self.SEARCH_ACCOUNT
+        #find_data_page.filled = True
         find_data_page.search_query = self.BUDGETS[1][2]
         find_data_page.open_site_search()
 

@@ -1,6 +1,4 @@
 import unittest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
 from pages.suitecrm_customer_account import CustomerAccount

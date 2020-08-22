@@ -1,25 +1,20 @@
 import unittest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from dotenv import load_dotenv
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
 from pages.suitecrm_create_case import CreateCases
+from lib.suitecrm_open_chrome_driver import *
 
 
 class SuiteCrm(unittest.TestCase):
 
     def setUp(self):
-        options = Options()
-        options.add_argument("--incognito")
-        options.add_argument("--start-maximized")
-        self.driver = webdriver.Chrome(options=options)
-        load_dotenv()
+        self.driver = get_driver()
 
     def tearDown(self):
         self.driver.close()
 
-    def test_suitecrm(self):
+    #def test_suitecrm(self):
+    def suitecrm(self):
         auth_basic = AuthBasicPage(self.driver)
         auth_basic.authenticate()
 

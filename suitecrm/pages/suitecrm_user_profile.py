@@ -1,7 +1,7 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
-from lib.suitecrm_add_file import SuitecrmAdd
 from selenium.webdriver.common.by import By
 import json
+import os
 from random import randint
 
 
@@ -21,7 +21,7 @@ class FillUserProfile(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_users.json") as file:
+        with open(os.getcwd() + "/data/data_users.json") as file:
             self.USERS = json.load(file)
 
         self.NAME = self.USERS['user_name'] + '-' + str(randint(10, 50))

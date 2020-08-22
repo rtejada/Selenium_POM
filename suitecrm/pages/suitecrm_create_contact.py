@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
-from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
+from lib.suitecrm_search_users import SearchUsers
 from pages.suitecrm_create_new_contact import CreateNewContact
 
 
@@ -26,11 +26,12 @@ class CreateContact(SuitecrmBasePage):
     CONTACT_POINT = (By.ID, 'lead_source')
     SAVE = (By.ID, 'SAVE')
 
-    VIEW_CONTACT = (By.LINK_TEXT, 'Ver Contactos')
+    VIEW_CONTACTS = (By.LINK_TEXT, 'Ver Contactos')
     FILTER = (By.XPATH, "//a[@title = 'Filtro']")
-    TABLE_ROWS_SELECTOR = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
-    NAME_SELECTOR = '//*[@id = "MassUpdate"]//div/table/tbody/'
-    COL_SELECTOR = '/td[3]//a'
+    RAPID_FILTER = (By.LINK_TEXT, 'Filtro rápido')
+    WINDOW_VISIBLE = (By.ID, 'searchDialog')
+    BUTTON_NAME = (By.ID, 'search_name_basic')
+    SEARCH = (By.ID, 'search_form_submit')
 
     def page_contact(self):
 
@@ -63,22 +64,11 @@ class CreateContact(SuitecrmBasePage):
 
     def search_contact(self, contact_name):
 
-        search_contact = SuitecrmSiteSearchElement(self.driver)
-        search_contact.access_menu = self.VIEW_CONTACT
+        search_contact = SearchUsers(self.driver)
+        search_contact.access_option = self.VIEW_CONTACTS
         search_contact.press_filter = self.FILTER
-        search_contact.table_rows_selector = self.TABLE_ROWS_SELECTOR
-        search_contact.col_selector = self.COL_SELECTOR
-        search_contact.name_selector = self.NAME_SELECTOR
-        value = search_contact.search_element(contact_name)
-
+        search_contact.press_rapid_filter = self.RAPID_FILTER
+        search_contact.visible_selector = self.WINDOW_VISIBLE
+        search_contact.contact_name = self.BUTTON_NAME
+        value = search_contact.search_user(contact_name)
         return value
-
-
-
-
-
-
-
-
-
-

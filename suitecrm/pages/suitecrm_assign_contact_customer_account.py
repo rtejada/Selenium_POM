@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
 from lib.DEPRECATED_suitecrm_search_customer import SearchCustomer
-from lib.suitecrm_site_search import SuitecrmSiteSearch
+import os
 import json
 
 
@@ -17,7 +17,7 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_users.json") as file:
+        with open(os.getcwd() + "/data/data_users.json") as file:
             self.DATA_USERS = json.load(file)
 
         self.CUSTOMER_NAME = self.DATA_USERS['customer_name']

@@ -2,6 +2,7 @@ from lib.suitecrm_base_page import SuitecrmBasePage
 from lib.suitecrm_site_search import SuitecrmSiteSearch
 from selenium.webdriver.common.by import By
 import json
+import os
 from random import randint
 
 
@@ -22,7 +23,7 @@ class FillEmployeeInfo(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_users.json") as data:
+        with open(os.getcwd() + "/data/data_users.json") as data:
             self.DATA_USERS = json.load(data)
 
         self.EMAIL = str(randint(10000, 20000)) + self.DATA_USERS['email']

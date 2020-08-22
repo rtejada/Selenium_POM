@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from random import randint
 import json
 import os
+from dotenv import load_dotenv
 
 
 class CreateCases(SuitecrmBasePage):
@@ -36,6 +37,8 @@ class CreateCases(SuitecrmBasePage):
     USER_LAST_NAME = ''
 
     def load_variables(self):
+
+        load_dotenv(os.getcwd() + "/tests/.env")
         self.CUSTOMER = os.getenv("CUSTOMER")
         self.USER_FIRST_NAME = os.getenv("USER_FIRST_NAME")
         self.USER_LAST_NAME = os.getenv("USER_LAST_NAME")
@@ -44,7 +47,7 @@ class CreateCases(SuitecrmBasePage):
         super().__init__(driver)
         self.load_variables()
 
-        with open("../data/data_case.json") as file:
+        with open(os.getcwd() + "/data/data_case.json") as file:
             self.CASES = json.load(file)
 
         self.TYPE_CASE = self.CASES['type']

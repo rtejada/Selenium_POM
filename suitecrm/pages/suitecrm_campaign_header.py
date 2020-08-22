@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
 from random import randint
 import json
+import os
 
 
 class CreateCampaignHeader(SuitecrmBasePage):
@@ -25,7 +26,7 @@ class CreateCampaignHeader(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_campaign.json") as file:
+        with open(os.getcwd() + "/data/data_campaign.json") as file:
             self.DATA_CAMPAIGN = json.load(file)
             
         self.DATA_CAMPAIGN['name_campaign'] = self.DATA_CAMPAIGN['name_campaign'] + ' ' + str(randint(1, 90000000))

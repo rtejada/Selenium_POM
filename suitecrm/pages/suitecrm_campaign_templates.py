@@ -23,7 +23,7 @@ class CreateCampaignTemplates(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_campaign.json") as file:
+        with open(os.getcwd() + "/data/data_campaign.json") as file:
             self.DATA_CAMPAIGN = json.load(file)
 
         self.DATA_CAMPAIGN['text_link'] = self.DATA_CAMPAIGN['text_link'] + str(randint(222, 9999)) + ' '

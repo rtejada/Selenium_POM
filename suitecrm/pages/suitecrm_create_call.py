@@ -3,6 +3,7 @@ from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from lib.suitecrm_site_search import SuitecrmSiteSearch
 from selenium.webdriver.common.by import By
 import json
+import os
 from random import randint
 
 
@@ -41,7 +42,7 @@ class CreateCall(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_users.json") as file:
+        with open(os.getcwd() + "/data/data_users.json") as file:
             self.CALL_DATA = json.load(file)
 
         self.CALL_SUBJECT = self.CALL_DATA['subject'] + str(randint(8000, 10000))

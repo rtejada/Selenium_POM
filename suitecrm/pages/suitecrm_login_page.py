@@ -2,6 +2,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 from lib.suitecrm_base_page import SuitecrmBasePage
+from dotenv import load_dotenv
 import os
 
 
@@ -20,6 +21,7 @@ class LoginPage(SuitecrmBasePage):
 
     def load_variables(self):
 
+        load_dotenv(os.getcwd() + "/tests/.env")
         self.USERNAME = os.getenv("USERNAME")
         self.USERNAME_PWD = os.getenv("USERNAME_PWD")
 

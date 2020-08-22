@@ -4,6 +4,7 @@ from pages.suitecrm_employee_information import FillEmployeeInfo
 from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from selenium.webdriver.common.by import By
 import json
+import os
 from random import randint
 
 
@@ -27,7 +28,7 @@ class CreateUser(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_users.json") as file:
+        with open(os.getcwd() + "/data/data_users.json") as file:
             self.USERS = json.load(file)
 
         self.USERS['pass'] = self.USERS['pass'] + str(randint(1000, 2000))

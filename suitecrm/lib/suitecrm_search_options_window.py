@@ -31,3 +31,5 @@ class SuitecrmSiteSearchElement(SuitecrmBasePage):
         else:
             return False
 
+
+

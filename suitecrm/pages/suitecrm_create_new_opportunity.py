@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from random import randint
 import json
 import os
-
+from dotenv import load_dotenv
 
 class CreateNewOpportunity(SuitecrmBasePage):
 
@@ -37,6 +37,8 @@ class CreateNewOpportunity(SuitecrmBasePage):
     CAMPAIGN = ''
 
     def load_variables(self):
+
+        load_dotenv(os.getcwd() + "/tests/.env")
         self.CUSTOMER = os.getenv("CUSTOMER")
         self.MAIL_CUSTOMER = os.getenv("MAIL_CUSTOMER")
         self.TELEPHONE = os.getenv("TELEPHONE")
@@ -47,7 +49,7 @@ class CreateNewOpportunity(SuitecrmBasePage):
         super().__init__(driver)
         self.load_variables()
 
-        with open("../data/data_opportunity.json") as file:
+        with open(os.getcwd() + "/data/data_opportunity.json") as file:
             self.OPPORTUNITY = json.load(file)
 
         self.OPPORTUNITY['name_opportunity'] = self.OPPORTUNITY['name_opportunity'] + '-' + str(randint(1000, 2000))

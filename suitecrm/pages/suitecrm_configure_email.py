@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
 from random import randint
+import os
 
 
 class ConfigureEmail(SuitecrmBasePage):
@@ -25,7 +26,7 @@ class ConfigureEmail(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        f = open("../data/email_data.txt", "r")
+        f = open(os.getcwd() + "/data/email_data.txt", "r")
         self.EMAIL_DATA = f.readlines()
         f.close()
 

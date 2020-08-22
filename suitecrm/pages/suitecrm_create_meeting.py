@@ -4,7 +4,7 @@ from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
 from selenium.webdriver.common.by import By
 from random import randint
 import json
-
+import os
 
 class CreateNewMeeting(SuitecrmBasePage):
 
@@ -42,7 +42,7 @@ class CreateNewMeeting(SuitecrmBasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        with open("../data/data_users.json") as file:
+        with open(os.getcwd() + "/data/data_users.json") as file:
             self.LIST_MEETING = json.load(file)
 
         self.SUBJECT_MEETING = self.LIST_MEETING['subject'] + str(randint(500, 1000))
