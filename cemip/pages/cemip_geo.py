@@ -29,7 +29,7 @@ class CualEsMiIpGeo(CualEsMiIpBasePage):
         ip = IP()
 
         ip.country = data[1]
-        ip.city = data[3]
+        ip.city = self.normalize(data[3])
 
         lat = float(data[5][0:8])
         ip.lat = round(lat, 4)

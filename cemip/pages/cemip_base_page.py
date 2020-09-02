@@ -17,3 +17,15 @@ class CualEsMiIpBasePage:
 
         wait = WebDriverWait(self.driver, 10, poll_frequency=1)
         wait.until(EC.visibility_of_element_located(self.LOCATOR_WAIT))
+
+    def normalize(self, s):
+        replacements = (
+            ("á", "a"),
+            ("é", "e"),
+            ("í", "i"),
+            ("ó", "o"),
+            ("ú", "u"),
+        )
+        for a, b in replacements:
+            s = s.replace(a, b).replace(a.upper(), b.upper())
+        return s

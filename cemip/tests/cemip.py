@@ -1,5 +1,6 @@
 import unittest
-
+import HtmlTestRunner
+import os
 from selenium import webdriver
 from pages.cemip_geo import CualEsMiIpGeo
 from pages.cemip_home import CualEsMiIpHome
@@ -17,22 +18,21 @@ class CemipPOM(unittest.TestCase):
         self.driver.close()
 
     def test_cemip(self):
-        
         home = CualEsMiIpHome(self.driver)
-        
+
         home.load()
         home.press_button()
         home.wait_element_visible()
-        
+
         geo = CualEsMiIpGeo(self.driver)
-        
+
         cemip_data = geo.get_data()
-        
+
         maxm = CualEsMiIpMaxMind(self.driver)
-        
+
         maxm.load()
         maxm.wait_element_visible()
-        
+
         maxmip_data = maxm.get_data()
 
         self.assertEqual(cemip_data.ip, maxmip_data.ip)
@@ -44,4 +44,4 @@ class CemipPOM(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/home/roxana/Documentos/Selenium_POM/cemip/reports'))

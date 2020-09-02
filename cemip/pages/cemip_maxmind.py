@@ -32,7 +32,7 @@ class CualEsMiIpMaxMind(CualEsMiIpBasePage):
         ip = IP()
         ip.ip = data_maxmind[0]
 
-        city_nation = data_maxmind[2]
+        city_nation = self.normalize(data_maxmind[2])
         ip.country = city_nation[26:31]
         ip.city = city_nation[0:8]
         longitude_latitude = data_maxmind[5]
