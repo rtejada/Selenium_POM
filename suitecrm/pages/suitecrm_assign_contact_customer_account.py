@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from lib.suitecrm_base_page import SuitecrmBasePage
-from lib.DEPRECATED_suitecrm_search_customer import SearchCustomer
+from lib.suitecrm_search_customer import SearchCustomer
 import os
 import json
 
@@ -25,8 +25,10 @@ class AssignContactCustomerAccount(SuitecrmBasePage):
         self.CONTACT_LAST_NAME = self.DATA_USERS['contact_last_name']
 
     def customer_assign_contact(self):
+
         find_data_customer = SearchCustomer(self.driver)
-        customer = find_data_customer.search_customer(self.CUSTOMER_NAME)
+
+        find_data_customer.search_customer(self.CUSTOMER_NAME)
 
         self.window_scroll()
 

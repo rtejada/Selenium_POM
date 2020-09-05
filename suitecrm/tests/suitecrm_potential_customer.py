@@ -1,7 +1,7 @@
 import unittest
 from pages.suitecrm_auth_basic import AuthBasicPage
 from pages.suitecrm_login_page import LoginPage
-from pages.suitecrm_create_user import CreateUser
+from pages.suitecrm_potential_customer import PotentialCustomer
 from lib.suitecrm_open_chrome_driver import *
 
 
@@ -20,3 +20,12 @@ class SuiteCrm(unittest.TestCase):
 
         login = LoginPage(self.driver)
         login.login_user()
+
+        potential_customer = PotentialCustomer(self.driver)
+        potential_customer.page_account()
+        name = potential_customer.create()
+        found = potential_customer.search(name)
+
+        self.assertTrue(found, 'El cliente Potencial, no ha sido creado')
+
+
