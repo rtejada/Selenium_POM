@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from secrets import choice
+from string import ascii_letters, ascii_uppercase, digits
 
 
 class SuitecrmBasePage:
@@ -77,6 +79,14 @@ class SuitecrmBasePage:
         #Si quieres subir de nivel, usa esto, otra vez usé aquí "-500", puedes variar según su uso..
 
         self.driver.execute_script("scrollBy(0,-" + str(offset) + ");")
+
+    def random_letter(self, lenght = 5):
+
+        characters = ascii_letters + ascii_uppercase + digits
+        length = lenght
+        chain = ''.join(choice(characters) for char in range(length))
+
+        return chain
 
 
 
