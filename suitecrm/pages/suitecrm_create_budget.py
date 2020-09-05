@@ -1,6 +1,7 @@
 from lib.suitecrm_base_page import SuitecrmBasePage
 from lib.suitecrm_site_search import SuitecrmSiteSearch
-from lib.suitecrm_search_options_window import SuitecrmSiteSearchElement
+from lib.suitecrm_search_items import SearchUsers
+
 from selenium.webdriver.common.by import By
 import csv
 import os
@@ -33,6 +34,11 @@ class CreateNewBudget(SuitecrmBasePage):
     TABLE_ROWS_SELECTOR = (By.XPATH, '//*[@id="MassUpdate"]/div[3]/table/tbody/tr')
     NAME_SELECTOR = '//*[@id = "MassUpdate"]//div/table/tbody/'
     COL_SELECTOR = '/td[4]//a'
+
+    RAPID_FILTER = (By.LINK_TEXT, 'Filtro rápido')
+    SCREEN_VISIBLE = (By.ID, 'searchDialog')
+    NAME_TITLE = (By.ID, 'name_basic')
+    SEARCH = (By.ID, 'search_form_submit')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -90,7 +96,7 @@ class CreateNewBudget(SuitecrmBasePage):
         return self.TITLE
 
     def search_budget(self, title):
-
+        '''
         search_contact = SuitecrmSiteSearchElement(self.driver)
         search_contact.access_option = self.VIEW_CONTACT
         search_contact.press_filter = self.FILTER
@@ -100,7 +106,17 @@ class CreateNewBudget(SuitecrmBasePage):
         value = search_contact.search_element(title)
 
         return value
+        '''
+        search_contact = SearchUsers(self.driver)
+        search_contact.access_option = self.VIEW_CONTACT
+        search_contact.press_filter = self.FILTER
+        search_contact.press_rapid_filter = self.RAPID_FILTER
+        search_contact.visible_selector = self.SCREEN_VISIBLE
+        search_contact.contact_name = self.NAME_TITLE
 
+        value = search_contact.search_user(title)
+
+        return value
 
 
 
