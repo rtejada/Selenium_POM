@@ -59,7 +59,7 @@ repoze.lru==0.6
 requests==2.9.1
 Routes==2.2
 scandir==1.10.0
-scapy==2.2.0
+scapy==2.4.1
 selenium==3.141.0
 singledispatch==3.4.0.3
 six==1.10.0
