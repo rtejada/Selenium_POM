@@ -6,6 +6,7 @@ from random import randint
 import json
 import os
 
+
 class CreateNewMeeting(SuitecrmBasePage):
 
     LIST_INVITEES = ['invitees_add_1', 'invitees_add_2', 'invitees_add_3', 'invitees_add_4']
@@ -16,10 +17,10 @@ class CreateNewMeeting(SuitecrmBasePage):
     SCHEDULE_MEETING = (By.LINK_TEXT, 'Programar Reunión')
     SUBJECT = (By.ID, 'name')
     START = (By.ID, 'date_start_trigger')
-    CALENDAR_START_DAY = (By.XPATH, '//*[@id="date_start_trigger_div_t_cell36"]/a')
+    CALENDAR_START_DAY = (By.XPATH, '//*[@id="date_start_trigger_div_t_cell16"]/a')
     NEXT_MONTH = (By.XPATH, '//*[@id="date_end_trigger_div_t"]/thead/tr/th/div/a[3]')
     END = (By.ID, 'date_end_trigger')
-    END_DATE = (By.XPATH, '//*[@id="date_end_trigger_div_t_cell29"]/a')
+    END_DATE = (By.XPATH, '//*[@id="date_end_trigger_div_t_cell21"]/a')
 
     LINK_CUSTOMER = (By.ID, 'btn_parent_name')
     NAME_ACCOUNT = (By.ID, 'name_advanced')

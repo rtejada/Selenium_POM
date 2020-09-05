@@ -14,13 +14,14 @@ class CreateCampaignEmailMarketing(SuitecrmBasePage):
     MARKETING_ACCOUNT = (By.ID, 'inbound_email_id')
     PROGRAM_HOUR_DATE = (By.ID, 'date_start_trigger')
     WINDOW_VISIBLE = (By.ID, 'date_start_trigger_div')
-    DATE = (By.ID, 'date_start_trigger_div_t_cell33')
+    DATE = (By.ID, 'date_start_trigger_div_t_cell21')
     HOUR = (By.ID, 'date_start_hours')
     MINUTES = (By.ID, 'date_start_minutes')
     FROM_NAME = (By.ID, 'from_name')
     FROM_ADDRESS = (By.ID, 'from_addr')
     NEW_WINDOWS = (By.ID, 'next_button_div')
     EMAIL_NAME = 'SUITE-CRM- 35337354'
+    VISIBLE_LAUNCH_BUTTON = (By.XPATH, '//*[@id="step3"]//div//table/tbody/tr[3]/td/a')
     LAUNCH_EMAIL_SETTINGS = (By.LINK_TEXT, 'Lanzar Configuración de Email')
     SAVE = (By.ID, 'wiz_submit_button')
 
@@ -53,6 +54,8 @@ class CreateCampaignEmailMarketing(SuitecrmBasePage):
         self.window_scroll_home()
 
         self.click_button(self.BUTTON_NEXT)
+
+        self.wait_selector_visible(self.LAUNCH_EMAIL_SETTINGS)
 
         self.click_button(self.LAUNCH_EMAIL_SETTINGS)
 

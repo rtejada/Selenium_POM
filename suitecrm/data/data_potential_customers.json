@@ -1,0 +1,23 @@
+{
+  "code":200,
+  "id": [
+    18,
+    80
+  ],
+  "name": [
+    "Drama",
+    "Crimen"
+  ],
+  "production_country": "United States of America",
+  "original_language": "en",
+  "original_title": "The Shawshank Redemption",
+  "overview": "Acusado del asesinato de su mujer, Andrew Dufresne, tras ser condenado a cadena perpetua, es enviado a la prisión de Shawshank. Con el paso de los años conseguirá ganarse la confianza del director del centro y el respeto de sus compañeros presidiarios, especialmente de Red, el jefe de la mafia de los sobornos.",
+  "release_date": "1994-09-23",
+  "revenue": 28341469,
+  "runtime": 143,
+  "status": "Released",
+  "tagline": "El miedo te hace prisionero. Sólo la esperanza puede liberar.",
+  "title": "Cadena perpetua",
+  "vote_average": 8.7,
+  "vote_count": 17042
+}

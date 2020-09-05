@@ -1,5 +1,8 @@
 counduit/tests/.env
 suitecrm/tests/.env
-
+cemip/tests/.env
+features/lib/data/.env.conduit
+features/lib/data/.env.cualesmiip
 .idea/
 .idea
+venv/
