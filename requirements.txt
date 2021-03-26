@@ -54,7 +54,7 @@ pysqlite==2.7.0
 python-apt==1.1.0b1+ubuntu0.16.4.9
 python-dateutil==2.4.2
 pytz==2014.10
-PyYAML==3.11
+PyYAML==5.4
 repoze.lru==0.6
 requests==2.9.1
 Routes==2.2
