@@ -4,7 +4,7 @@ apsw==3.8.11.1.post1
 arandr==0.1.9
 BeautifulSoup==3.2.1
 beautifulsoup4==4.4.1
-certifi==2020.6.20
+certifi==2022.12.7
 chardet==2.3.0
 CherryPy==3.5.0
 configparser==4.0.2
