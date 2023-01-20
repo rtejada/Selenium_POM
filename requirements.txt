@@ -28,7 +28,7 @@ ipaddress==1.0.16
 lxml==3.5.0
 Magic-file-extensions==0.2
 Markdown==2.6.6
-mechanize==0.2.5
+mechanize==0.4.6
 meld==3.14.2
 mysql-connector-python==2.0.4
 mysql-utilities==1.6.1
